@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	<persistence-unit name="TiendaOnline">
-		<class>DAO.Articulo</class>
-		<class>DAO.Categoria</class>
-		<class>DAO.Lineaspedido</class>
-		<class>DAO.LineaspedidoPK</class>
-		<class>DAO.Pedido</class>
-		<class>DAO.Role</class>
-		<class>DAO.Tiposproducto</class>
-		<class>DAO.Usuariosadministrador</class>
-		<class>DAO.Usuarioscliente</class>
+		<class>friki.tienda.com.DAO.Articulo</class>
+		<class>friki.tienda.com.DAO.Categoria</class>
+		<class>friki.tienda.com.DAO.Lineaspedido</class>
+		<class>friki.tienda.com.DAO.LineaspedidoPK</class>
+		<class>friki.tienda.com.DAO.Pedido</class>
+		<class>friki.tienda.com.DAO.Role</class>
+		<class>friki.tienda.com.DAO.Tiposproducto</class>
+		<class>friki.tienda.com.DAO.Usuariosadministrador</class>
+		<class>friki.tienda.com.DAO.Usuarioscliente</class>
 	</persistence-unit>
 </persistence>
