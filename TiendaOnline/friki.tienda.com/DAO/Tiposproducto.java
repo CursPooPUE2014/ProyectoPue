@@ -1,36 +1,34 @@
-package model;
+package DAO;
 
 import java.io.Serializable;
 import javax.persistence.*;
 
 
 /**
- * The persistent class for the categorias database table.
+ * The persistent class for the tiposproducto database table.
  * 
  */
 @Entity
-@Table(name="categorias")
-@NamedQuery(name="Categoria.findAll", query="SELECT c FROM Categoria c")
-public class Categoria implements Serializable {
+@NamedQuery(name="Tiposproducto.findAll", query="SELECT t FROM Tiposproducto t")
+public class Tiposproducto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="id_categoria")
-	private int idCategoria;
+	private int id_tipoProducto;
 
 	private String descripcion;
 
 	private String nombre;
 
-	public Categoria() {
+	public Tiposproducto() {
 	}
 
-	public int getIdCategoria() {
-		return this.idCategoria;
+	public int getId_tipoProducto() {
+		return this.id_tipoProducto;
 	}
 
-	public void setIdCategoria(int idCategoria) {
-		this.idCategoria = idCategoria;
+	public void setId_tipoProducto(int id_tipoProducto) {
+		this.id_tipoProducto = id_tipoProducto;
 	}
 
 	public String getDescripcion() {
