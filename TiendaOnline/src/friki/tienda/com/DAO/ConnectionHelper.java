@@ -1,4 +1,4 @@
-package DAO;
+package friki.tienda.com.DAO;
 
 import java.sql.Connection;
 
@@ -6,19 +6,19 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-public class DAO {
-	private static DAO instancia;
+public class ConnectionHelper {
+	private static ConnectionHelper instancia;
 	private EntityManager em;
 	
-	public static DAO getInstance(){
+	public static ConnectionHelper getInstance(){
 		if (instancia==null){ 
-			instancia= new DAO();
+			instancia= new ConnectionHelper();
 		}
 		
 		return instancia;
 	}
 	
-	private DAO(){
+	private ConnectionHelper(){
 		EntityManagerFactory emf = 
 				Persistence.createEntityManagerFactory("TiendaOnlineDAO");
 			
