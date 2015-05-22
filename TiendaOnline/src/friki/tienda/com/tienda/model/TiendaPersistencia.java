@@ -16,7 +16,9 @@ import friki.tienda.com.Persistencia.ConnectionHelper;
 public class TiendaPersistencia {
 	private ConnectionHelper miConnectionHelper;
 	
+	
 	public TiendaPersistencia(){
+		super();
 		miConnectionHelper=ConnectionHelper.getInstance();
 	}
 		

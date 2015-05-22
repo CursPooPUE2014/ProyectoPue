@@ -4,6 +4,7 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/tienda"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/backoffice"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/tests"/>
         <property name="context-root" value="TiendaOnline"/>
         <property name="java-output-path" value="/TiendaOnline/build/classes"/>
     </wb-module>
