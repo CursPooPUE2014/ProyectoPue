@@ -13,13 +13,27 @@ import org.apache.struts.action.DynaActionForm;
 import org.codehaus.jettison.json.JSONObject;
 
 import friki.tienda.com.global.services.Md5Encryption;
-
 import friki.tienda.com.tienda.beans.loginClienteBean;
 
 public class LoginClienteAction extends Action {
 	public ActionForward getJSONData(ActionMapping mapping, ActionForm form,
-			   HttpServletRequest request, HttpServletResponse response) {
+			   HttpServletRequest request, HttpServletResponse response) throws Exception {
 		response.setContentType("application/json");
+		
+		Md5Encryption pwdEnc = null;
+		
+		String username = request.getParameter("email");
+		String pwd = request.getParameter("contrasenya");
+
+		pwd = pwdEnc.encrypt(pwd);
+		
+		System.out.println("###############");
+		System.out.println("pwd: " + pwd);
+		System.out.println("###############");
+		
+		//...
+		
+		//jsonObj.write(response.getWriter());
 			
 				return null;
 
