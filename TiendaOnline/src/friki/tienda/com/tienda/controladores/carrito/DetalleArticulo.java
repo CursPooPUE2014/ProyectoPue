@@ -1,4 +1,4 @@
-package friki.tienda.com.controlador.carrito;
+package friki.tienda.com.tienda.controladores.carrito;
 
 import org.apache.struts.action.Action;
 
