@@ -18,7 +18,6 @@ public class TiendaPersistencia {
 	
 	
 	public TiendaPersistencia(){
-		super();
 		miConnectionHelper=ConnectionHelper.getInstance();
 	}
 		
