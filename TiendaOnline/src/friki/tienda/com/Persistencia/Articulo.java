@@ -1,4 +1,4 @@
-package friki.tienda.com.DAO;
+package friki.tienda.com.Persistencia;
 
 import java.io.Serializable;
 import javax.persistence.*;
