@@ -1,28 +1,28 @@
-package friki.tienda.com.tienda.controladores.login;
+package friki.tienda.com.tienda.controladores.carrito;
 
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import friki.tienda.com.Persistencia.Pedido;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class ComprobarLogin extends Action {
+public class VerCarrito extends Action {
 
-	
 	public ActionForward execute(ActionMapping mapping, 
 			ActionForm form,
 			HttpServletRequest req, HttpServletResponse resp) 
 	{
-		// Intentamos obtener el nombre del usuario si es que está ya validado
-		String sessionUser = (String) req.getSession().getAttribute("username");
+
+		Pedido sessionPedido = (Pedido) req.getSession().getAttribute("pedido");
 		
-		if (sessionUser == null){
-			return mapping.findForward("login");
-		}else{
-			return mapping.findForward("datosEnvio");
-		}
+		req.setAttribute("lineasPedido", sessionPedido.getLineaspedidos());
+		
+		return mapping.findForward("verCarrito");
 		
 	}
+		
 }
