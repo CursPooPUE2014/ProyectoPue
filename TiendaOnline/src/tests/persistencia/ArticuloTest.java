@@ -30,9 +30,7 @@ public class ArticuloTest {
 
 		em=ConnectionHelper.getInstance().getEntityManager();
 		Articulo articulo=null;
-    	String sql = "SELECT * FROM articulos " +
-			"WHERE UPPER(nombre) LIKE ? " +	
-			"ORDER BY nombre";
+    	String sql = "SELECT * FROM articulos " ;
        Connection conn = ConnectionHelper.getInstance().getConnection();
            
         PreparedStatement ps = conn.prepareStatement(sql);
@@ -40,7 +38,7 @@ public class ArticuloTest {
         ResultSet rs = ps.executeQuery();
        rs.next();
        articulo = new Articulo();
-       	articulo.setIdArticulo(rs.getInt("id"));
+       	articulo.setIdArticulo(rs.getInt("id_articulo"));
        	articulo.setNombre(rs.getString("nombre"));
     }
 	@Test
@@ -78,7 +76,7 @@ public class ArticuloTest {
 	
 	@Test
 	public void testGetNombre() {
-		assertFalse( articulo.getNombre()!=null && articulo.getNombre().isEmpty());
+		assert( articulo.getNombre()!=null && !articulo.getNombre().isEmpty());
 	}
 
 

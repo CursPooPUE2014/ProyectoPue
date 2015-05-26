@@ -28,7 +28,7 @@ public class TiendaPersistencia {
 			"WHERE UPPER(nombre) LIKE ? " +	
 			"ORDER BY nombre";
         try (Connection conn = miConnectionHelper.getConnection()){
-           
+            
             PreparedStatement ps = conn.prepareStatement(sql);
             
             ResultSet rs = ps.executeQuery();
@@ -49,7 +49,7 @@ public class TiendaPersistencia {
 	
     protected Articulo processRow(ResultSet rs) throws SQLException {
     	Articulo articulo = new Articulo();
-    	articulo.setIdArticulo(rs.getInt("id"));
+    	articulo.setIdArticulo(rs.getInt("id_articulo"));
     	articulo.setNombre(rs.getString("nombre"));
     	
         return articulo;

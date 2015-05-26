@@ -2,6 +2,11 @@ package tests.persistencia;
 
 import static org.junit.Assert.*;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -11,11 +16,20 @@ import javax.persistence.Query;
 
 
 
+
+
+
+
+
+
+
+
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import friki.tienda.com.Persistencia.Articulo;
+import friki.tienda.com.Persistencia.ConnectionHelper;
 
 public class PersistenciaTest {
 	 private static EntityManagerFactory factory;
@@ -33,27 +47,38 @@ public class PersistenciaTest {
 
 	@Test
 	public void test() {
-		factory = Persistence.createEntityManagerFactory("TiendaOnline");
 		
-		EntityManager em = factory.createEntityManager();
-	    // read the existing entries and write to console
-	    Query q = em.createQuery("select * from articulos");
-	    List<Articulo> lista = q.getResultList();
-	    for (Articulo articulo : lista) {
-	      System.out.println(articulo.toString());
-	    }
-	    System.out.println("Size: " + lista.size());
-
-	    // create new todo
-	    em.getTransaction().begin();
-	    Articulo articulo = new Articulo();
-	    
-	    articulo.setNombre("prueba");
-	    em.persist(articulo);
-	    em.getTransaction().commit();
-
-	    em.close();
+		String sql = "SELECT * FROM articulos ";
+		Connection conn = ConnectionHelper.getInstance().getConnection();
+		
+		Statement statement;
+		try {
+			statement = conn.createStatement();
+			ResultSet rs = statement.executeQuery(sql);
+			 
+			 List<Articulo> lista = new ArrayList<Articulo>();
+		   
+		    while (rs.next()) {
+	            lista.add(processRow(rs));
+		    }
+		    
+		    for (Articulo articulo : lista) {
+		      System.out.println(articulo.toString());
+		    }
+		    System.out.println("Size: " + lista.size());
+		} catch (SQLException e) {
+			fail("SQLException: "+ e.getMessage()); // TODO
+		}
+		
 	    assert(true);
 	}
+	protected Articulo processRow(ResultSet rs) throws SQLException {
+    	Articulo articulo = new Articulo();
+    	articulo.setIdArticulo(rs.getInt("id_articulo"));
+    	articulo.setNombre(rs.getString("nombre"));
+    	
+        return articulo;
+    }
+	
 
 }
