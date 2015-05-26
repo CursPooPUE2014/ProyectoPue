@@ -1,5 +1,7 @@
 package friki.tienda.com.tienda.controladores.carrito;
 
+import java.util.List;
+
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -18,12 +20,24 @@ public class VerCarrito extends Action {
 			HttpServletRequest request, HttpServletResponse response) 
 	{
 		
-		response.setContentType("application/json");
-
-		Lineaspedido sessionLineasPedido = 
-				(Lineaspedido) request.getSession().getAttribute("lineaspedido");
+	//	response.setContentType("application/json");
+		response.setContentType("text/plain");
 		
-//		req.setAttribute("lineasPedido", sessionPedido.getLineaspedidos());
+	//	Pedido sessionPedido = (Pedido) request.getSession().getAttribute("pedido");
+	//	List<Lineaspedido> lineaspedidos = sessionPedido.getLineaspedidos();
+		
+		List<Lineaspedido> lineasPedido = 
+				(List<Lineaspedido>) request.getSession().getAttribute("lineasPedido");
+		
+		for (Lineaspedido lineaPedido : lineasPedido) {
+			StringBuilder builder = 
+				new StringBuilder().
+					append("{\"articulo\":\"").
+						append(lineaPedido.getArticulo()).					
+					append("\",\"cantidad\":").
+						append(lineaPedido.getCantidad()).
+					append("}");
+		}
 		
 		return mapping.findForward("verCarrito");
 		
