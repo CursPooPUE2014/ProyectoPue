@@ -1,7 +1,9 @@
 package friki.tienda.com.Persistencia;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.util.List;
 
 
@@ -27,6 +29,8 @@ public class Articulo implements Serializable {
 	private String imagen;
 
 	private String nombre;
+	
+	private String novedades;
 
 	private double precio;
 
@@ -126,6 +130,15 @@ public class Articulo implements Serializable {
 		lineaspedido.setArticulo(null);
 
 		return lineaspedido;
+	}
+
+	public void setNovedades(String novedades) {
+		
+		this.novedades=novedades;
+	}
+	public String getNovedades( ) {
+		
+		return novedades;
 	}
 
 }

@@ -51,7 +51,12 @@ public class TiendaPersistencia {
     	Articulo articulo = new Articulo();
     	articulo.setIdArticulo(rs.getInt("id_articulo"));
     	articulo.setNombre(rs.getString("nombre"));
-    	
+    	articulo.setDescripcion(rs.getString("descripcion"));
+    	articulo.setPrecio(rs.getDouble("precio"));
+    	articulo.setStock(rs.getInt("stock"));
+    	articulo.setCategoria(rs.getString("categoria"));
+    	articulo.setTipoDeProducto(rs.getString("tipoDeProducto"));
+    	articulo.setNovedades(rs.getString("novedades"));
         return articulo;
     }
 
