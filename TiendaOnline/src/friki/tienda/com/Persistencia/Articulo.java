@@ -30,7 +30,7 @@ public class Articulo implements Serializable {
 
 	private String nombre;
 	
-	private String novedades;
+	private String novedad;
 
 	private double precio;
 
@@ -132,13 +132,13 @@ public class Articulo implements Serializable {
 		return lineaspedido;
 	}
 
-	public void setNovedades(String novedades) {
+	public void setNovedad(String novedad) {
 		
-		this.novedades=novedades;
+		this.novedad=novedad;
 	}
-	public String getNovedades( ) {
+	public String getNovedad( ) {
 		
-		return novedades;
+		return novedad;
 	}
 
 }

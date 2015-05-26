@@ -12,7 +12,7 @@ import java.sql.SQLException;
 
 import javax.persistence.EntityManager;
 
-import org.junit.Before;
+
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -38,8 +38,14 @@ public class ArticuloTest {
         ResultSet rs = ps.executeQuery();
        rs.next();
        articulo = new Articulo();
-       	articulo.setIdArticulo(rs.getInt("id_articulo"));
-       	articulo.setNombre(rs.getString("nombre"));
+       articulo.setIdArticulo(rs.getInt("id_articulo"));
+	   	articulo.setNombre(rs.getString("nombre"));
+	   	articulo.setDescripcion(rs.getString("descripcion"));
+	   	articulo.setPrecio(rs.getDouble("precio"));
+	   	articulo.setStock(rs.getInt("stock"));
+	   	articulo.setCategoria(rs.getString("categoria"));
+	   	articulo.setTipoDeProducto(rs.getString("tipo_de_producto"));
+	   	articulo.setNovedad(rs.getString("novedad"));
     }
 	@Test
 	public void testGetEntityManager() {
@@ -48,9 +54,7 @@ public class ArticuloTest {
 	@Test
 	public void testArticulo() {
 		 Articulo articulo2=null;
-	    	String sql = "SELECT * FROM articulos " +
-				"WHERE UPPER(nombre) LIKE ? " +	
-				"ORDER BY nombre";
+	    	String sql = "SELECT * FROM articulos ";
 	        try (Connection conn = ConnectionHelper.getInstance().getConnection()){
 	           
 	            PreparedStatement ps = conn.prepareStatement(sql);
@@ -58,8 +62,14 @@ public class ArticuloTest {
 	            ResultSet rs = ps.executeQuery();
 	           rs.next();
 	           articulo2 = new Articulo();
-		       	articulo2.setIdArticulo(rs.getInt("id"));
-		       	articulo2.setNombre(rs.getString("nombre"));
+	           articulo2.setIdArticulo(rs.getInt("id_articulo"));
+	           articulo2.setNombre(rs.getString("nombre"));
+	           articulo2.setDescripcion(rs.getString("descripcion"));
+	           articulo2.setPrecio(rs.getDouble("precio"));
+	           articulo2.setStock(rs.getInt("stock"));
+	           articulo2.setCategoria(rs.getString("categoria"));
+	           articulo2.setTipoDeProducto(rs.getString("tipo_de_producto"));
+	           articulo2.setNovedad(rs.getString("novedad"));
 	         
 	        } catch (SQLException e) {
 	        	fail("SQLException: "+ e.getMessage()); // TODO
@@ -87,7 +97,7 @@ public class ArticuloTest {
 
 	@Test
 	public void testGetCategoria() {
-		fail("Not yet implemented"); // TODO
+		assert( articulo.getCategoria()!=null && !articulo.getCategoria().isEmpty()); // TODO
 	}
 
 	@Test
@@ -97,7 +107,7 @@ public class ArticuloTest {
 
 	@Test
 	public void testGetDescripcion() {
-		fail("Not yet implemented"); // TODO
+		assert( articulo.getDescripcion()!=null && !articulo.getDescripcion().isEmpty()); // TODO
 	}
 
 	@Test
@@ -123,7 +133,7 @@ public class ArticuloTest {
 
 	@Test
 	public void testGetPrecio() {
-		fail("Not yet implemented"); // TODO
+		assert(articulo.getPrecio()>=0); // TODO
 	}
 
 	@Test
@@ -133,7 +143,7 @@ public class ArticuloTest {
 
 	@Test
 	public void testGetStock() {
-		fail("Not yet implemented"); // TODO
+		assert(articulo.getStock()>=0); // TODO
 	}
 
 	@Test
@@ -143,7 +153,7 @@ public class ArticuloTest {
 
 	@Test
 	public void testGetTipoDeProducto() {
-		fail("Not yet implemented"); // TODO
+		assert( articulo.getTipoDeProducto()!=null && !articulo.getTipoDeProducto().isEmpty()); // TODO
 	}
 
 	@Test
