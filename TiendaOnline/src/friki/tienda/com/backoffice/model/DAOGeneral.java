@@ -12,7 +12,7 @@ public class DAOGeneral {
 
 	protected static EntityManager init() {
 		EntityManagerFactory emf = Persistence
-				.createEntityManagerFactory("FormacionMVC");
+				.createEntityManagerFactory("TiendaOnline");
 		EntityManager em = emf.createEntityManager();
 		return em;
 	}

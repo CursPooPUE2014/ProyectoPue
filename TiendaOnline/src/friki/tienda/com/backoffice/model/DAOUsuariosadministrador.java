@@ -1,6 +1,7 @@
 package friki.tienda.com.backoffice.model;
 
-import friki.tienda.com.Persistencia.Usuarioscliente;
+import friki.tienda.com.Persistencia.Usuariosadministrador;
+
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -17,36 +18,35 @@ public class DAOUsuariosadministrador extends DAOGeneral implements DAOInterfaz 
 		return false;
 	}
 	
-	//Sobrecarga para ajustarnos a los parámetros de Usuarioscliente
-	public boolean save(int idUsuario, String nombre, String email, String contrasenya, String dirPostal, int telefono) {
-		
-		boolean retorno=false;
-		
-		EntityManager em = init();
+	//Sobrecarga para ajustarnos a los parámetros de Usuariosadministrador
+		public boolean save(int idUsuario, String email, String contrasenya, String rol) {
+			
+			boolean retorno=false;
+			
+			EntityManager em = init();
 
-		em.getTransaction().begin();
-		
-		// Comprobar si el curso ya existe
-		Usuarioscliente existe_instancia=em.find(Usuarioscliente.class, idUsuario);
-		
-		// Si no existe lo damos de alta 
-		if (existe_instancia==null) {
+			em.getTransaction().begin();
 			
-			Usuarioscliente user = new Usuarioscliente();
-			user.setIdUsuario(idUsuario);		
-			user.setNombre(nombre);
-			user.setEmail(email);
-			user.setContrasenya(contrasenya);
-			user.setDirPostal(dirPostal);
-			user.setTelefono(telefono);
+			// Comprobar si el curso ya existe
+			Usuariosadministrador existe_instancia=em.find(Usuariosadministrador.class, idUsuario);
 			
-			em.persist(user);
-			em.flush();
-			retorno=true;
-			
+			// Si no existe lo damos de alta 
+			if (existe_instancia==null) {
+				
+				Usuariosadministrador user = new Usuariosadministrador();
+				user.setIdUsuario(idUsuario);			
+				user.setEmail(email);
+				user.setContrasenya(contrasenya);
+				user.setRol(rol);
+				
+				em.persist(user);
+				em.flush();
+				retorno=true;
+				
+			}
+			em.getTransaction().commit();
+			return retorno;
 		}
-		em.getTransaction().commit();
-		return retorno;
-	}
+
 
 }
