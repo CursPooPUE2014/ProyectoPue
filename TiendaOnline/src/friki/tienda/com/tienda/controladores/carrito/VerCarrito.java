@@ -5,6 +5,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import friki.tienda.com.Persistencia.Lineaspedido;
 import friki.tienda.com.Persistencia.Pedido;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,12 +15,15 @@ public class VerCarrito extends Action {
 
 	public ActionForward execute(ActionMapping mapping, 
 			ActionForm form,
-			HttpServletRequest req, HttpServletResponse resp) 
+			HttpServletRequest request, HttpServletResponse response) 
 	{
-
-		Pedido sessionPedido = (Pedido) req.getSession().getAttribute("pedido");
 		
-		req.setAttribute("lineasPedido", sessionPedido.getLineaspedidos());
+		response.setContentType("application/json");
+
+		Lineaspedido sessionLineasPedido = 
+				(Lineaspedido) request.getSession().getAttribute("lineaspedido");
+		
+//		req.setAttribute("lineasPedido", sessionPedido.getLineaspedidos());
 		
 		return mapping.findForward("verCarrito");
 		
