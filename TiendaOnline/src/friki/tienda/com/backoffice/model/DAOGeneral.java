@@ -36,4 +36,43 @@ public class DAOGeneral {
 		return results;
 	}
 	
+	
+	/*
+	
+	public List<Usuarioscliente> findAll() {
+		//List<Usuarioscliente> lista = new ArrayList<Usuarioscliente>();
+
+		String sql = "SELECT * FROM Usuarioscliente "
+				+ "WHERE UPPER(nombre) LIKE ? " + "ORDER BY nombre";
+		return (List<Usuarioscliente>) load(sql);		
+
+	}
+
+	public Usuarioscliente findById(int id) {
+
+		String sql ="SELECT * FROM Usuarioscliente WHERE id = ?";
+		Usuarioscliente uCliente = null;			
+		try(Connection conn = miConnectionHelper.getConnection()){
+	            PreparedStatement ps = conn.prepareStatement(sql);
+	            ps.setInt(1, id);
+	            ResultSet rs = ps.executeQuery();
+	            if (rs.next()) {
+	                uCliente = processRow(rs);
+	            }
+		}catch(Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+		return null;
+	}
+
+	protected Usuarioscliente processRow(ResultSet rs) throws SQLException {
+		Usuarioscliente uCliente = new Usuarioscliente();
+		uCliente.setIdUsuario(rs.getInt("id_usuario"));
+		uCliente.setNombre(rs.getString("nombre"));
+		return uCliente;
+	}
+*/
+	
+	
 }
