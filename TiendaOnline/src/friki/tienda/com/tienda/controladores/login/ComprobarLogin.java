@@ -13,10 +13,10 @@ public class ComprobarLogin extends Action {
 	
 	public ActionForward execute(ActionMapping mapping, 
 			ActionForm form,
-			HttpServletRequest req, HttpServletResponse resp) 
+			HttpServletRequest request, HttpServletResponse response) 
 	{
 		// Intentamos obtener el nombre del usuario si es que está ya validado
-		String sessionUser = (String) req.getSession().getAttribute("username");
+		String sessionUser = (String) request.getSession().getAttribute("idUsuario");
 		
 		if (sessionUser == null){
 			return mapping.findForward("login");
