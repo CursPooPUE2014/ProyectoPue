@@ -9,10 +9,6 @@ import org.apache.struts.action.ActionForm;
 import java.util.List;
 
 
-/**
- * The persistent class for the articulos database table.
- * 
- */
 @Entity
 @Table(name="articulos")
 @NamedQuery(name="Articulo.findAll", query="SELECT a FROM Articulo a")
