@@ -6,14 +6,14 @@
 <struts-config>
 
 	<form-beans>
-		<form-bean name="loginClienteBean"
+		<form-bean name="LoginClienteBean"
 			type="friki.tienda.com.tienda.beans.loginClienteBean" />
 	</form-beans>
 
 	<action-mappings>	
 		<action 
 			path="/loginCliente" 
-			name="loginClienteBean"
+			name="LoginClienteBean"
 			scope="request"
 			validate="true"		
 			type="friki.tienda.com.tienda.controladores.login.LoginClienteAction">	
