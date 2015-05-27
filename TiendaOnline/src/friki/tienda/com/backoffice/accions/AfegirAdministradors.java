@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import friki.tienda.com.Persistencia.AdministradorBean;
-import friki.tienda.com.backoffice.formbeans.*;
+
 
 public class AfegirAdministradors extends Action {
 
