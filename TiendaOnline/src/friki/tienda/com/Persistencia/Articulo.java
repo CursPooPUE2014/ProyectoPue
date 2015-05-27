@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+import org.apache.struts.action.ActionForm;
+
 import java.util.List;
 
 
@@ -14,7 +16,7 @@ import java.util.List;
 @Entity
 @Table(name="articulos")
 @NamedQuery(name="Articulo.findAll", query="SELECT a FROM Articulo a")
-public class Articulo implements Serializable {
+public class Articulo extends ActionForm implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
