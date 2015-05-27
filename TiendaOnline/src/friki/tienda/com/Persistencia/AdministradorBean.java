@@ -1,7 +1,7 @@
 package friki.tienda.com.Persistencia;
 
 import org.apache.struts.action.ActionForm;
-
+//test
 public class AdministradorBean extends ActionForm{
 	private int idUsuario;
 	private String email;
