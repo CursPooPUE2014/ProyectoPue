@@ -1,7 +1,10 @@
 package friki.tienda.com.Persistencia;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
+import org.apache.struts.action.ActionForm;
 
 
 /**
@@ -11,7 +14,7 @@ import javax.persistence.*;
 @Entity
 @Table(name="categorias")
 @NamedQuery(name="Categoria.findAll", query="SELECT c FROM Categoria c")
-public class Categoria implements Serializable {
+public class Categoria extends ActionForm implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
