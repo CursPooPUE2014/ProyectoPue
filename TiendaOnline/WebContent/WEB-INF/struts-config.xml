@@ -8,6 +8,8 @@
 	<form-beans>
 		<form-bean name="loginClienteBean"
 			type="friki.tienda.com.tienda.beans.loginClienteBean" />
+		<form-bean name="ArticuloBean"
+			type="friki.tienda.com.Persistencia.Articulo" />
 	</form-beans>
 
 	<action-mappings>	
@@ -18,5 +20,27 @@
 			validate="true"		
 			type="friki.tienda.com.tienda.controladores.login.LoginClienteAction">	
   		</action>		
+  		
+  		<action 
+  			path="/altaArticulo" 
+  			name="ArticuloBean"
+			type="friki.tienda.com.backoffice.actions.gestionCatalogo.AltaArticulo">
+			<forward name="ok" path="/altaOK.jsp" />
+			<forward name="ko" path="/altaKO.jsp" />
+		</action>
+		<action path="/altaCategoria" name="categoria"
+			type="friki.tienda.com.backoffice.actions.gestionCatalogo.AltaCategoria">
+			<forward name="ok" path="/altaOK.jsp" />
+			<forward name="ko" path="/altaKO.jsp" />
+		</action>
+		<action path="/preEditarArticulo">
+			<forward name="encontrado" path="/editarArticulo.jsp" />
+			<forward name="noencontrado" path="/NoEncontrado.jsp" />
+		</action>
+		<action path="/preEditarCategoria">
+			<forward name="encontrado" path="/editarCategoria.jsp" />
+			<forward name="noencontrado" path="/NoEncontrado.jsp" />
+		</action>
+		
 	</action-mappings>
 </struts-config>
