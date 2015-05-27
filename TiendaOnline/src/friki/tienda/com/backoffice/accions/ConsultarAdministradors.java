@@ -10,6 +10,7 @@ import java.io.Serializable;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import friki.tienda.com.Persistencia.AdministradorBean;
 import friki.tienda.com.backoffice.formbeans.*;
 
 public class ConsultarAdministradors extends Action {
