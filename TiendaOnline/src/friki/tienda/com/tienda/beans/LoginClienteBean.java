@@ -84,7 +84,8 @@ public class LoginClienteBean extends ActionForm{
 		} 
 		// consulto a la BBDD
 		// si el user existe retorno el objeto
-
+		String query = "SELECT * FROM usuarioscliente where email = \"" + email +
+				"\" and contrasenya = \""  + contrasenya + "\"";
 		return res;	
 	}
 }

@@ -5,13 +5,12 @@ import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.struts.action.Action;
-
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-
 import org.codehaus.jettison.json.JSONObject;
 
 import friki.tienda.com.tienda.beans.LoginClienteBean;
@@ -47,7 +46,9 @@ public class LoginClienteAction extends Action {
 			if(cliente == null){
 				js.accumulate("errores","Usuario o contraseña incorrecto");
 			} else {
-				// cargo el cliente
+				// cargo el cliente en la sesion
+				HttpSession sesion = request.getSession(true);
+				sesion.setAttribute("cliente", cliente);
 			}
 		}
 
