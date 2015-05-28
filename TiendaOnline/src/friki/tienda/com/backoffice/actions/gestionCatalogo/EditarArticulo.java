@@ -1,5 +1,7 @@
 package friki.tienda.com.backoffice.actions.gestionCatalogo;
 
-public class EditarArticulo {
+import org.apache.struts.action.Action;
+
+public class EditarArticulo extends Action {
 
 }
