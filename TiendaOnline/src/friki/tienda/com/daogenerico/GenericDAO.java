@@ -1,0 +1,159 @@
+package friki.tienda.com.daogenerico;
+
+/*
+ * Clase de implementación para la interfaz IGenericDAO.
+ * Extiende la clase de Spring JpaDaoSupport, la cual 
+ * proporciona métodos de conveniencia que utilizaremos como
+ * implementaciones por defecto de los métodos CRUD. 
+ * 
+ * El parámetro genérico T debe extendender a IPersistent usando 
+ * el tipo K, lo cual nos permite acceder al método getKey() que 
+ * emplearemos para recuperar la clave primaria de cualquier POJO JPA.
+ * 
+ * No tenemos que preocuparnos sobre el cast (que es obligatorio), 
+ * dado que estamos usando el tipo genérico del parámetro.
+ */
+
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
+import javax.persistence.PersistenceException;
+import javax.persistence.TypedQuery;
+
+import friki.tienda.com.Persistencia.ConnectionHelper;
+
+/*
+import org.springframework.orm.jpa.support.JpaDaoSupport;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.annotation.Propagation;
+*/
+/*
+ * Indicamos a nivel de clase que todos los métodos soportarán
+ * transacciones y serán de sólo lectura
+ */
+
+
+public class GenericDAO<K,T extends IPersistent<K>> implements IGenericDAO<K,T> {		
+	
+	//private Class<T> claseDePersistencia;
+	
+	EntityManager manager;
+	
+	public void load(){
+		
+		manager = ConnectionHelper.getInstance().getEntityManager();
+		
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<T> listAll(final Class<T> clase) {
+		String query="SELECT o FROM " + clase.getSimpleName() + " o";
+		load();
+		
+		
+		List<T> listaDeObjetos = null;
+		try {		
+			TypedQuery<T> consulta = manager.createQuery(query, clase);
+			listaDeObjetos = consulta.getResultList();
+			
+		} finally {
+			manager.close();
+		}		
+		return listaDeObjetos;
+	}
+
+	@SuppressWarnings("unchecked")
+	public T findByKey(T object) { 
+		
+		load();
+		T objeto = null;
+		try {
+		
+			objeto = (T) manager.find((Class<T>)object.getClass(), object.getKey());
+			
+		} finally {
+			manager.close();
+		}
+		
+		return objeto;
+	}
+
+	
+	public T save(T object) {
+		load();
+		EntityTransaction tx = null;
+		try {
+
+			tx = manager.getTransaction();
+			tx.begin();
+			manager.persist(object);
+			tx.commit();
+
+		} catch (PersistenceException e) {
+
+			tx.rollback();
+			throw e;
+		} finally {
+
+			manager.close();
+		}
+		return object;
+	}
+
+	
+	public T update(T object) {
+		load();
+		EntityTransaction tx = null;
+		try {
+
+			tx = manager.getTransaction();
+			tx.begin();
+			manager.merge(object);
+			tx.commit();
+
+		} catch (PersistenceException e) {
+			tx.rollback();
+			throw e;
+		} finally {
+
+			manager.close();
+		}
+		
+		return object;
+	}
+	
+	/*
+	 * Propagation.REQUIRED indica que el método actual debe 
+	 * ejecutarse dentro de una transacción. Si hay una 
+	 * transacción en progreso, el método se ejecutará dentro
+	 * de dicha transacción. Si no, se iniciará una nueva
+	 */
+	
+	public boolean delete(T object) {
+		load();
+		EntityTransaction tx = null;
+		try {
+
+			tx = manager.getTransaction();
+			tx.begin();
+			manager.remove(manager.merge(object));
+			tx.commit();
+			return true;
+		} catch (PersistenceException e) {
+
+			tx.rollback();
+			throw e;
+			
+		} finally {
+
+			manager.close();
+		}	
+	}
+ 	
+}
