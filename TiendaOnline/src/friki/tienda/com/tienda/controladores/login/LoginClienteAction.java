@@ -3,7 +3,6 @@ package friki.tienda.com.tienda.controladores.login;
 
 import java.io.PrintWriter;
 
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -15,8 +14,8 @@ import org.apache.struts.action.ActionMapping;
 
 import org.codehaus.jettison.json.JSONObject;
 
-import friki.tienda.com.global.services.Md5Encryption;
 import friki.tienda.com.tienda.beans.LoginClienteBean;
+import friki.tienda.com.tienda.beans.ClienteBean;
 
 public class LoginClienteAction extends Action {
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
@@ -28,24 +27,29 @@ public class LoginClienteAction extends Action {
 		String username = request.getParameter("email");
 		String pwd = request.getParameter("contrasenya");
 		
+		LoginClienteBean usuario = new LoginClienteBean(username,pwd);
 		
-		Md5Encryption pwdEnc = null;
-		LoginClienteBean usuario =new LoginClienteBean(username,pwd);
-
 		// creamos objeto json que enviaremos en la response
 		
 		JSONObject js = null;
 		
-		String err = preValidar(username,pwd);
+		// vemos si se han introducido datos correctos en el form
+		String err = usuario.preValidar();
 		
-		js.accumulate("errores",err);
-
-		
-		pwd = pwdEnc.encrypt(pwd);
-			
-			// consulto a la BBDD
-			// si viene respuesta cargamos idUsuario en la sesion
-			// Si no añadimos mensaje al json "user o pwd incorrecto"
+		// si hay errores al validar datos añadimos msg al json
+		// si no, comprobamos si el usuario existe en la BBDD
+		if(err != null){
+			js.accumulate("errores",err);
+		} else {
+			ClienteBean cliente = usuario.exist();
+			// si el cliente es nulo añadimos al json msg de error
+			// si no cargamos el usuario en la sesion
+			if(cliente == null){
+				js.accumulate("errores","Usuario o contraseña incorrecto");
+			} else {
+				// cargo el cliente
+			}
+		}
 
 		 
 		PrintWriter pw = response.getWriter();
@@ -58,7 +62,7 @@ public class LoginClienteAction extends Action {
 		
 	}
 	
-
+/*
 	private String preValidar(String email,String pwd) {
 		// comprobamos que usuario y pwd no vengan nulos
 		// y que el email tenga formato correcto
@@ -86,7 +90,7 @@ public class LoginClienteAction extends Action {
         java.util.regex.Matcher m = p.matcher(email);
         return m.matches();
 	}
-	
+*/	
 	private String pagRedirect(){
 
 		// segun de donde vengamos redirigimos a una página o a otra		
