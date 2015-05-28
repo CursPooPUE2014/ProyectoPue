@@ -12,7 +12,7 @@ import org.apache.struts.action.ActionMapping;
 import org.codehaus.jettison.json.JSONObject;
 
 
-public class Pago extends Action {
+public class DatosEnvio extends Action {
 
 	public ActionForward execute(ActionMapping mapping, 
 			ActionForm form,
@@ -21,15 +21,11 @@ public class Pago extends Action {
 		// establecemos tipo de respuesta json
 		response.setContentType("application/json");
 				
-		// recuperamos los parámetros de la request y creamos el objeto
-		String numTarjeta = request.getParameter("numTarjeta");
-		String fechaCad = request.getParameter("fechaCad");
-		String numSecreto = request.getParameter("numSecreto");
-		
 		// creamos objeto json que enviaremos en la response
 		JSONObject js = new JSONObject();
 		
-		String err = preValidar(numTarjeta, fechaCad, numSecreto);
+		String err = "";
+		// String err = preValidar(numTarjeta, fechaCad, numSecreto);
 		
 		js.accumulate("errores",err);
 		
@@ -39,13 +35,14 @@ public class Pago extends Action {
 		pw.close();
 		
 		if (err == ""){
-			return mapping.findForward("finPago");
-		}else{
 			return mapping.findForward("pago");
+		}else{
+			return null;
 		}
 
 	}
 
+	/*
 	public String preValidar(String numTarjeta, String fechaCad, String numSecreto) {
 		String errores = "";
 		
@@ -63,5 +60,5 @@ public class Pago extends Action {
 		return errores;
 	}
 	
-	
+	*/
 }
