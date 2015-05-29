@@ -8,6 +8,8 @@
 	<form-beans>
 		<form-bean name="LoginClienteBean"
 			type="friki.tienda.com.tienda.beans.loginClienteBean" />
+					<form-bean name="LoginClienteBean"
+			type="friki.tienda.com.tienda.beans.RegistroClienteBean" />
 		<form-bean name="ArticuloBean"
 			type="friki.tienda.com.Persistencia.Articulo" />
 	</form-beans>
@@ -18,8 +20,16 @@
 			name="LoginClienteBean"
 			scope="request"
 			validate="true"		
-			type="friki.tienda.com.tienda.controladores.login.LoginClienteAction">	
-  		</action>		
+			type="friki.tienda.com.tienda.controladores.cliente.LoginClienteAction">	
+  		</action>
+  		
+  		<action 
+			path="/registroCliente" 
+			name="LoginClienteBean"
+			scope="request"
+			validate="true"		
+			type="friki.tienda.com.tienda.controladores.cliente.RegistroClienteAction">	
+  		</action>	
   		
   		<action 
   			path="/altaArticulo" 

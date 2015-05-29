@@ -1,4 +1,4 @@
-package friki.tienda.com.tienda.controladores.login;
+package friki.tienda.com.tienda.controladores.cliente;
 
 
 import java.io.PrintWriter;
@@ -14,7 +14,7 @@ import org.apache.struts.action.ActionMapping;
 import org.codehaus.jettison.json.JSONObject;
 
 import friki.tienda.com.tienda.beans.LoginClienteBean;
-import friki.tienda.com.tienda.beans.ClienteBean;
+import friki.tienda.com.tienda.beans.RegistroClienteBean;
 
 public class LoginClienteAction extends Action {
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
@@ -40,7 +40,7 @@ public class LoginClienteAction extends Action {
 		if(err != null){
 			js.accumulate("errores",err);
 		} else {
-			ClienteBean cliente = usuario.exist();
+			RegistroClienteBean cliente = usuario.exist();
 			// si el cliente es nulo añadimos al json msg de error
 			// si no cargamos el usuario en la sesion
 			if(cliente == null){
@@ -64,7 +64,6 @@ public class LoginClienteAction extends Action {
 	}
 	
 	private String pagRedirect(){
-
 		// segun de donde vengamos redirigimos a una página o a otra		
 		return null;
 	}

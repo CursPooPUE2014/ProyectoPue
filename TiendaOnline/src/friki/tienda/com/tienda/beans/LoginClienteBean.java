@@ -1,7 +1,9 @@
 package friki.tienda.com.tienda.beans;
 
 import org.apache.struts.action.ActionForm;
-import friki.tienda.com.tienda.beans.ClienteBean;
+
+import friki.tienda.com.tienda.beans.RegistroClienteBean;
+import friki.tienda.com.tienda.utilities.ValidationForms;
 import friki.tienda.com.global.services.Md5Encryption;
 
 public class LoginClienteBean extends ActionForm{
@@ -31,15 +33,13 @@ public class LoginClienteBean extends ActionForm{
 	}
 
 	public String preValidar() {
-		// comprobamos que usuario y pwd no vengan nulos
-		// y que el email tenga formato correcto
 		String errores = "";
 		
 		if (email == null || email.equals("")) {
 			errores = errores + "indique el e-mail</br>";
 			
 		} else {
-			if(!isValidEmailAddress()){
+			if(!ValidationForms.isValidEmailAddress(email)){
 				errores = errores + "indique un e-mail válido</br>";
 			}
 		}
@@ -47,7 +47,7 @@ public class LoginClienteBean extends ActionForm{
 		if (contrasenya == null || contrasenya.equals("")) {
 			errores =  errores + "indique la contraseña</br>";
 		} else {
-			if(!isValidPwd()){
+			if(!ValidationForms.isValidPwd(contrasenya)){
 				errores =  errores + "la contraseña debe contener"
 						+ " al menos 8 caracteres, y estos deben ser"
 						+ "alfanuméricos</br>";
@@ -56,7 +56,7 @@ public class LoginClienteBean extends ActionForm{
 		
 		return errores;
 	}
-	
+/*	
 	private boolean isValidPwd() {
 		if(contrasenya.length() < 8 || contrasenya.matches("[a-zA-Z0-9]{8,}")){
 			return true;
@@ -71,9 +71,9 @@ public class LoginClienteBean extends ActionForm{
         java.util.regex.Matcher m = p.matcher(email);
         return m.matches();
 	}
-	
-	public ClienteBean exist(){
-		ClienteBean res = null;
+*/	
+	public RegistroClienteBean exist(){
+		RegistroClienteBean res = null;
 		
 		try {
 			contrasenya = pwdEnc.encrypt(contrasenya);

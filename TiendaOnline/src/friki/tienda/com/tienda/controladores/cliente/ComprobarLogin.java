@@ -1,4 +1,4 @@
-package friki.tienda.com.tienda.controladores.login;
+package friki.tienda.com.tienda.controladores.cliente;
 
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
