@@ -17,12 +17,18 @@ public class ComprobarLogin extends Action {
 	{
 		// Intentamos obtener el nombre del usuario si es que está ya validado
 		String sessionUser = (String) request.getSession().getAttribute("idUsuario");
+				
+		StringBuilder builder = new StringBuilder();
 		
 		if (sessionUser == null){
-			return mapping.findForward("login");
+			// return mapping.findForward("login");
+			builder.append("{\"redireccionamiento\":\"login.jsp\"}");
 		}else{
-			return mapping.findForward("datosEnvio");
+			// return mapping.findForward("datosEnvio");
+			builder.append("{\"redireccionamiento\":\"datosEnvio.jsp\"}");
 		}
 		
+		request.setAttribute("redireccionamiento", builder.toString());	
+		return null;
 	}
 }

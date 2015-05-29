@@ -40,16 +40,19 @@ public class VerCarrito extends Action {
 						append(lineaPedido.getArticulo().getNombre()).	
 					append("\"precioArticulo\":\"").
 						append(lineaPedido.getArticulo().getPrecio()).	
-					append("\",\"cantidad\":").
+					append("\",\"cantidad\":\"").
 						append(lineaPedido.getCantidad()).
-					append("\",\"precio\":").
+					append("\",\"precio\":\"").
 						append(lineaPedido.getPrecio()).
-					append("}");
+					append("\"}");
 		}
-		
+		builder.append(",{\"redireccionamiento\":\"verCarrito.jsp\"}");
+				
 		request.setAttribute("lineasPedidosJSON", builder.toString());		
 		
-		return mapping.findForward("verCarrito");		
+	//  return mapping.findForward("verCarrito");		
+		return null;
+	
 	}
 		
 }

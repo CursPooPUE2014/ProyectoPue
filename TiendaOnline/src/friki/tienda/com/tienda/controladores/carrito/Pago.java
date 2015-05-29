@@ -4,6 +4,7 @@ import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
@@ -11,6 +12,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.codehaus.jettison.json.JSONObject;
 
+import friki.tienda.com.tienda.beans.PagoBean;
 
 public class Pago extends Action {
 
@@ -26,10 +28,13 @@ public class Pago extends Action {
 		String fechaCad = request.getParameter("fechaCad");
 		String numSecreto = request.getParameter("numSecreto");
 		
+		PagoBean pago = new PagoBean(numTarjeta, fechaCad, numSecreto);
+		
 		// creamos objeto json que enviaremos en la response
 		JSONObject js = new JSONObject();
 		
-		String err = preValidar(numTarjeta, fechaCad, numSecreto);
+		// vemos si se han introducido datos correctos en el form
+		String err = pago.preValidar(numTarjeta, fechaCad, numSecreto);
 		
 		js.accumulate("errores",err);
 		
@@ -38,30 +43,27 @@ public class Pago extends Action {
 		pw.flush();
 		pw.close();
 		
-		if (err == ""){
-			return mapping.findForward("finPago");
-		}else{
-			return mapping.findForward("pago");
-		}
-
-	}
-
-	public String preValidar(String numTarjeta, String fechaCad, String numSecreto) {
-		String errores = "";
+		StringBuilder builder = new StringBuilder();
 		
-		if (numTarjeta == null || numTarjeta.equals("")) {
-			errores += "indique el número de la tarjeta";
-		}
+		if (err == ""){
+			
+			// marcar en la BBDD el pedido como pagado ...
+			
+			HttpSession sesion = request.getSession(true);
+			sesion.invalidate();
+			
+			//return mapping.findForward("finPago");
+			builder.append("{\"redireccionamiento\":\"finPago.jsp\"}");
 
-		if (fechaCad == null || fechaCad.equals("")) {
-			errores += "indique la fecha de caducidad";
+		}else{
+			
+			//return mapping.findForward("pago");
+			builder.append("{\"redireccionamiento\":\"pago.jsp\"}");
 		}
-				
-		if (numSecreto == null || numSecreto.equals("")) {
-			errores += "indique el número secreto";
-		}
-		return errores;
+		
+		request.setAttribute("redireccionamiento", builder.toString());	
+		return null;
+
 	}
-	
 	
 }

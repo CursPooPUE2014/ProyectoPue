@@ -25,7 +25,7 @@ public class DatosEnvio extends Action {
 		JSONObject js = new JSONObject();
 		
 		String err = "";
-		// String err = preValidar(numTarjeta, fechaCad, numSecreto);
+		// String err = preValidar();
 		
 		js.accumulate("errores",err);
 		
@@ -42,23 +42,4 @@ public class DatosEnvio extends Action {
 
 	}
 
-	/*
-	public String preValidar(String numTarjeta, String fechaCad, String numSecreto) {
-		String errores = "";
-		
-		if (numTarjeta == null || numTarjeta.equals("")) {
-			errores += "indique el número de la tarjeta";
-		}
-
-		if (fechaCad == null || fechaCad.equals("")) {
-			errores += "indique la fecha de caducidad";
-		}
-				
-		if (numSecreto == null || numSecreto.equals("")) {
-			errores += "indique el número secreto";
-		}
-		return errores;
-	}
-	
-	*/
 }
