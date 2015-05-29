@@ -63,35 +63,6 @@ public class LoginClienteAction extends Action {
 		
 	}
 	
-/*
-	private String preValidar(String email,String pwd) {
-		// comprobamos que usuario y pwd no vengan nulos
-		// y que el email tenga formato correcto
-		String errores = "";
-		
-		if (email == null || email.equals("")) {
-			errores = errores + "indique el e-mail";
-			
-		} else {
-			if(!isValidEmailAddress(email)){
-				errores = errores + "indique un e-mail válido";
-			}
-		}
-
-		if (pwd == null || pwd.equals("")) {
-			errores =  errores + "indique la contraseña";
-		}
-		
-		return errores;
-	}
-	
-	private boolean isValidEmailAddress(String email) {
-        String ePattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
-        java.util.regex.Pattern p = java.util.regex.Pattern.compile(ePattern);
-        java.util.regex.Matcher m = p.matcher(email);
-        return m.matches();
-	}
-*/	
 	private String pagRedirect(){
 
 		// segun de donde vengamos redirigimos a una página o a otra		
