@@ -1,7 +1,10 @@
 package friki.tienda.com.Persistencia;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
+import friki.tienda.com.daogenerico.IPersistent;
 
 
 /**
@@ -10,7 +13,7 @@ import javax.persistence.*;
  */
 @Entity
 @NamedQuery(name="Lineaspedido.findAll", query="SELECT l FROM Lineaspedido l")
-public class Lineaspedido implements Serializable {
+public class Lineaspedido implements Serializable, IPersistent {
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
@@ -73,4 +76,9 @@ public class Lineaspedido implements Serializable {
 		this.articulo = articulo;
 	}
 
+	@Override
+	public LineaspedidoPK getKey() {
+		return this.id;
+	}
+	
 }

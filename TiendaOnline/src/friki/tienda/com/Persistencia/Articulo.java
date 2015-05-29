@@ -6,13 +6,15 @@ import javax.persistence.*;
 
 import org.apache.struts.action.ActionForm;
 
+import friki.tienda.com.daogenerico.IPersistent;
+
 import java.util.List;
 
 
 @Entity
 @Table(name="articulos")
 @NamedQuery(name="Articulo.findAll", query="SELECT a FROM Articulo a")
-public class Articulo extends ActionForm implements Serializable {
+public class Articulo extends ActionForm implements Serializable, IPersistent {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -137,6 +139,11 @@ public class Articulo extends ActionForm implements Serializable {
 	public String getNovedad( ) {
 		
 		return novedad;
+	}
+
+	@Override
+	public Object getKey() {		
+		return this.idArticulo;
 	}
 
 }

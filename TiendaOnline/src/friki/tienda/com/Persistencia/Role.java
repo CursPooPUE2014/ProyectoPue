@@ -1,7 +1,10 @@
 package friki.tienda.com.Persistencia;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
+import friki.tienda.com.daogenerico.IPersistent;
 
 
 /**
@@ -11,7 +14,7 @@ import javax.persistence.*;
 @Entity
 @Table(name="roles")
 @NamedQuery(name="Role.findAll", query="SELECT r FROM Role r")
-public class Role implements Serializable {
+public class Role implements Serializable, IPersistent {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -37,6 +40,11 @@ public class Role implements Serializable {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+	@Override
+	public Object getKey() {		
+		return this.idRol;
 	}
 
 }

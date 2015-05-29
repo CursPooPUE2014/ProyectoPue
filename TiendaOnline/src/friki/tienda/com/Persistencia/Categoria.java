@@ -6,6 +6,8 @@ import javax.persistence.*;
 
 import org.apache.struts.action.ActionForm;
 
+import friki.tienda.com.daogenerico.IPersistent;
+
 
 /**
  * The persistent class for the categorias database table.
@@ -14,7 +16,7 @@ import org.apache.struts.action.ActionForm;
 @Entity
 @Table(name="categorias")
 @NamedQuery(name="Categoria.findAll", query="SELECT c FROM Categoria c")
-public class Categoria extends ActionForm implements Serializable {
+public class Categoria extends ActionForm implements Serializable, IPersistent {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -50,6 +52,11 @@ public class Categoria extends ActionForm implements Serializable {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+	@Override
+	public Object getKey() {
+		return this.idCategoria;
 	}
 
 }
