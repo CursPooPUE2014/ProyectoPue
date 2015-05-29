@@ -14,7 +14,7 @@ import friki.tienda.com.daogenerico.IPersistent;
 @Entity
 @Table(name="roles")
 @NamedQuery(name="Role.findAll", query="SELECT r FROM Role r")
-public class Role implements Serializable, IPersistent {
+public class Role implements Serializable, IPersistent<Integer> {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -43,7 +43,7 @@ public class Role implements Serializable, IPersistent {
 	}
 
 	@Override
-	public Object getKey() {		
+	public Integer getKey() {		
 		return this.idRol;
 	}
 

@@ -15,7 +15,7 @@ import friki.tienda.com.daogenerico.IPersistent;
  */
 @Entity
 @NamedQuery(name="Tiposproducto.findAll", query="SELECT t FROM Tiposproducto t")
-public class Tiposproducto implements Serializable, IPersistent {
+public class Tiposproducto implements Serializable, IPersistent<Integer> {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -53,7 +53,7 @@ public class Tiposproducto implements Serializable, IPersistent {
 	}
 
 	@Override
-	public Object getKey() {
+	public Integer getKey() {
 		return this.id_tipoProducto;
 	}
 

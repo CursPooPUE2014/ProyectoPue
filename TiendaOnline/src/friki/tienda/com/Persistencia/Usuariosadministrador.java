@@ -13,7 +13,7 @@ import friki.tienda.com.daogenerico.IPersistent;
  */
 @Entity
 @NamedQuery(name="Usuariosadministrador.findAll", query="SELECT u FROM Usuariosadministrador u")
-public class Usuariosadministrador implements Serializable, IPersistent {
+public class Usuariosadministrador implements Serializable, IPersistent<Integer> {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -62,7 +62,7 @@ public class Usuariosadministrador implements Serializable, IPersistent {
 	}
 
 	@Override
-	public Object getKey() {		
+	public Integer getKey() {		
 		return this.idUsuario;
 	}
 

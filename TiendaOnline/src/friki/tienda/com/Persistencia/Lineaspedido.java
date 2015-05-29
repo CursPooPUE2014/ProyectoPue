@@ -13,7 +13,7 @@ import friki.tienda.com.daogenerico.IPersistent;
  */
 @Entity
 @NamedQuery(name="Lineaspedido.findAll", query="SELECT l FROM Lineaspedido l")
-public class Lineaspedido implements Serializable, IPersistent {
+public class Lineaspedido implements Serializable, IPersistent<LineaspedidoPK> {
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId

@@ -17,7 +17,7 @@ import java.util.List;
 @Entity
 @Table(name="pedidos")
 @NamedQuery(name="Pedido.findAll", query="SELECT p FROM Pedido p")
-public class Pedido implements Serializable, IPersistent {
+public class Pedido implements Serializable, IPersistent<Integer> {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -105,7 +105,7 @@ public class Pedido implements Serializable, IPersistent {
 	}
 
 	@Override
-	public Object getKey() {
+	public Integer getKey() {
 		return this.idPedido;
 	}
 

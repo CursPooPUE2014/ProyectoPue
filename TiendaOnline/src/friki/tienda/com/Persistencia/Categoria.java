@@ -16,7 +16,7 @@ import friki.tienda.com.daogenerico.IPersistent;
 @Entity
 @Table(name="categorias")
 @NamedQuery(name="Categoria.findAll", query="SELECT c FROM Categoria c")
-public class Categoria extends ActionForm implements Serializable, IPersistent {
+public class Categoria extends ActionForm implements Serializable, IPersistent<Integer> {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -55,7 +55,7 @@ public class Categoria extends ActionForm implements Serializable, IPersistent {
 	}
 
 	@Override
-	public Object getKey() {
+	public Integer getKey() {
 		return this.idCategoria;
 	}
 
