@@ -20,6 +20,11 @@ public class LineaspedidoPK implements Serializable {
 
 	public LineaspedidoPK() {
 	}
+	
+	public LineaspedidoPK(int articulo, int pedido) {
+		this.idArticulo = articulo;
+		this.idPedido = pedido;
+	}
 	public int getIdPedido() {
 		return this.idPedido;
 	}
@@ -53,5 +58,11 @@ public class LineaspedidoPK implements Serializable {
 		hash = hash * prime + this.idArticulo;
 		
 		return hash;
+	}
+	
+	public LineaspedidoPK getKey(){
+		
+		return this;
+		
 	}
 }

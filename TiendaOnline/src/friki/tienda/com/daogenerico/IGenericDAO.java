@@ -16,7 +16,7 @@ import java.util.List;
 public interface IGenericDAO<K,T extends IPersistent<K>> {
 	List<T> listAll(final Class<T> clase);
 	T save(T object);
-	T findByKey(T object);
+	T findByKey(T object, Class<K> key);
 	T update(T object);
 	boolean delete(T object);
 }

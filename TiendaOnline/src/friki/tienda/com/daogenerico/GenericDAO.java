@@ -1,5 +1,4 @@
 package friki.tienda.com.daogenerico;
-
 /*
  * Clase de implementación para la interfaz IGenericDAO.
  * Extiende la clase de Spring JpaDaoSupport, la cual 
@@ -34,7 +33,7 @@ import org.springframework.transaction.annotation.Propagation;
 */
 /*
  * Indicamos a nivel de clase que todos los métodos soportarán
- * transacciones y serán de sólo lectura
+ * transacciones y serán de sólo lectura 
  */
 
 
@@ -44,9 +43,15 @@ public class GenericDAO<K,T extends IPersistent<K>> implements IGenericDAO<K,T> 
 	
 	EntityManager manager;
 	
-	public void load(){
+	private void load(){
 		
 		manager = ConnectionHelper.getInstance().getEntityManager();
+		
+	}
+	
+	private void close(){
+		
+		//manager.close();
 		
 	}
 	
@@ -56,29 +61,29 @@ public class GenericDAO<K,T extends IPersistent<K>> implements IGenericDAO<K,T> 
 		String query="SELECT o FROM " + clase.getSimpleName() + " o";
 		load();
 		
-		
 		List<T> listaDeObjetos = null;
 		try {		
 			TypedQuery<T> consulta = manager.createQuery(query, clase);
 			listaDeObjetos = consulta.getResultList();
 			
 		} finally {
-			manager.close();
+			close();
 		}		
 		return listaDeObjetos;
 	}
 
 	@SuppressWarnings("unchecked")
-	public T findByKey(T object) { 
+	public T findByKey(T object, Class<K> tipo) { 
 		
 		load();
+		
 		T objeto = null;
 		try {
-		
-			objeto = (T) manager.find((Class<T>)object.getClass(), object.getKey());
+			
+			objeto = (T) manager.find((Class<T>)object.getClass(), (K) object.getKey());
 			
 		} finally {
-			manager.close();
+			close();
 		}
 		
 		return objeto;
@@ -87,6 +92,7 @@ public class GenericDAO<K,T extends IPersistent<K>> implements IGenericDAO<K,T> 
 	
 	public T save(T object) {
 		load();
+		
 		EntityTransaction tx = null;
 		try {
 
@@ -99,9 +105,13 @@ public class GenericDAO<K,T extends IPersistent<K>> implements IGenericDAO<K,T> 
 
 			tx.rollback();
 			throw e;
+		} catch (Exception e) {
+
+			System.out.println(e.getMessage());
+			
 		} finally {
 
-			manager.close();
+			close();
 		}
 		return object;
 	}
@@ -109,6 +119,7 @@ public class GenericDAO<K,T extends IPersistent<K>> implements IGenericDAO<K,T> 
 	
 	public T update(T object) {
 		load();
+		
 		EntityTransaction tx = null;
 		try {
 
@@ -122,7 +133,7 @@ public class GenericDAO<K,T extends IPersistent<K>> implements IGenericDAO<K,T> 
 			throw e;
 		} finally {
 
-			manager.close();
+			close();
 		}
 		
 		return object;
@@ -137,6 +148,7 @@ public class GenericDAO<K,T extends IPersistent<K>> implements IGenericDAO<K,T> 
 	
 	public boolean delete(T object) {
 		load();
+		
 		EntityTransaction tx = null;
 		try {
 
@@ -152,7 +164,7 @@ public class GenericDAO<K,T extends IPersistent<K>> implements IGenericDAO<K,T> 
 			
 		} finally {
 
-			manager.close();
+			close();
 		}	
 	}
  	
