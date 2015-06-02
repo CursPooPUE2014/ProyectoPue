@@ -14,7 +14,7 @@ import org.apache.struts.action.ActionMapping;
 import org.codehaus.jettison.json.JSONObject;
 
 import friki.tienda.com.tienda.beans.LoginClienteBean;
-import friki.tienda.com.tienda.beans.RegistroClienteBean;
+import friki.tienda.com.tienda.beans.ClienteBean;
 
 public class LoginClienteAction extends Action {
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
@@ -30,7 +30,7 @@ public class LoginClienteAction extends Action {
 		
 		// creamos objeto json que enviaremos en la response
 		
-		JSONObject js = null;
+		JSONObject js = new JSONObject();
 		
 		// vemos si se han introducido datos correctos en el form
 		String err = usuario.preValidar();
@@ -40,7 +40,7 @@ public class LoginClienteAction extends Action {
 		if(err != null){
 			js.accumulate("errores",err);
 		} else {
-			RegistroClienteBean cliente = usuario.exist();
+			ClienteBean cliente = usuario.exist();
 			// si el cliente es nulo añadimos al json msg de error
 			// si no cargamos el usuario en la sesion
 			if(cliente == null){

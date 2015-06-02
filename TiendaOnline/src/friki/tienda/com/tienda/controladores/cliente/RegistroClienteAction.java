@@ -12,8 +12,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.codehaus.jettison.json.JSONObject;
 
-import friki.tienda.com.tienda.beans.LoginClienteBean;
-import friki.tienda.com.tienda.beans.RegistroClienteBean;
+import friki.tienda.com.tienda.beans.ClienteBean;
 
 public class RegistroClienteAction extends Action {
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
@@ -28,12 +27,12 @@ public class RegistroClienteAction extends Action {
 		String email = request.getParameter("email");
 		String telefono = request.getParameter("telefono");
 		
-		RegistroClienteBean cliente = new RegistroClienteBean(nombre,contrasenya,dir_postal,email);
+		ClienteBean cliente = new ClienteBean(nombre,contrasenya,dir_postal,email);
 		cliente.setTelefono(telefono);
 		
 		// creamos objeto json que enviaremos en la response
 		
-		JSONObject js = null;
+		JSONObject js = new JSONObject();
 		
 		// vemos si se han introducido datos correctos en el form
 		String err = cliente.preValidar();
@@ -58,7 +57,6 @@ public class RegistroClienteAction extends Action {
 
 		 
 		PrintWriter pw = response.getWriter();
-		//pw.write("({\"listaObjetos\":" + js.toString() + "})");
 		pw.write(js.toString());
 		pw.flush();
 		pw.close();

@@ -2,9 +2,9 @@ package friki.tienda.com.tienda.beans;
 
 import org.apache.struts.action.ActionForm;
 
-import friki.tienda.com.tienda.utilities.ValidationForms;
+import friki.tienda.com.tienda.utilities.UtilitiesTienda;
 
-public class RegistroClienteBean extends ActionForm{
+public class ClienteBean extends ActionForm{
 	private static final long serialVersionUID = 1L;
 	
 	private int	id_usuario;
@@ -14,11 +14,10 @@ public class RegistroClienteBean extends ActionForm{
 	private String email;
 	private String telefono;
 	
-	public RegistroClienteBean(){}
-	public RegistroClienteBean(String nombre, String contrasenya,
+	public ClienteBean(){}
+	public ClienteBean(String nombre, String contrasenya,
 			String dir_postal, String email) {
 		super();
-		this.id_usuario = id_usuario;
 		this.nombre = nombre;
 		this.contrasenya = contrasenya;
 		this.dir_postal = dir_postal;
@@ -68,7 +67,7 @@ public class RegistroClienteBean extends ActionForm{
 			errores = errores + "indique el e-mail</br>";
 			
 		} else {
-			if(!ValidationForms.isValidEmailAddress(email)){
+			if(!UtilitiesTienda.isValidEmailAddress(email)){
 				errores = errores + "indique un e-mail válido</br>";
 			}
 		}
@@ -76,7 +75,7 @@ public class RegistroClienteBean extends ActionForm{
 		if (contrasenya == null || contrasenya.equals("")) {
 			errores =  errores + "indique la contraseña</br>";
 		} else {
-			if(!ValidationForms.isValidPwd(contrasenya)){
+			if(!UtilitiesTienda.isValidPwd(contrasenya)){
 				errores =  errores + "la contraseña debe contener"
 						+ " al menos 8 caracteres, y estos deben ser"
 						+ "alfanuméricos</br>";
