@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.1.0.final using JasperReports Library version 6.1.0  -->
-<!-- 2015-06-02T14:20:06 -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="gestionInformeVentas" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7a5c9b49-9dc5-422a-ac69-e92cf61ef530">
+<!-- 2015-06-02T13:46:32 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="informePedidos" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7a5c9b49-9dc5-422a-ac69-e92cf61ef530">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="dbfriki"/>
 	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false"/>
 	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false"/>
@@ -14,7 +14,7 @@
 		</conditionalStyle>
 	</style>
 	<queryString>
-		<![CDATA[select * from  dbfriki.pedidos where  dbfriki.pedidos.estado = 'pagado']]>
+		<![CDATA[select * from dbfriki.pedidos where  dbfriki.pedidos.estado  = 'pdte. de cobro']]>
 	</queryString>
 	<field name="id_pedido" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
@@ -102,28 +102,28 @@
 	<columnHeader>
 		<band height="18" splitType="Stretch">
 			<staticText>
-				<reportElement style="Column header" x="0" y="0" width="199" height="18" forecolor="#000000" uuid="8a088fc2-ad35-4c49-8688-766bd77dbaf7"/>
+				<reportElement style="Column header" x="0" y="0" width="199" height="18" forecolor="#000000" uuid="bc3d8c2c-0ade-4ace-90c8-d9006f7b19c3"/>
 				<textElement>
 					<font isBold="false"/>
 				</textElement>
 				<text><![CDATA[id_pedido]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="199" y="0" width="199" height="18" forecolor="#000000" uuid="db9ca7cb-c8aa-44fe-a686-6047bf50c2e6"/>
+				<reportElement style="Column header" x="199" y="0" width="199" height="18" forecolor="#000000" uuid="9807d8ae-546e-4401-bcb3-b254736e3ff3"/>
 				<textElement>
 					<font isBold="false"/>
 				</textElement>
 				<text><![CDATA[id_cliente]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="398" y="0" width="199" height="18" forecolor="#000000" uuid="ddf559c0-b020-4e19-875d-164fbed0015e"/>
+				<reportElement style="Column header" x="398" y="0" width="199" height="18" forecolor="#000000" uuid="5597de90-bfb9-4590-9450-17b4e9c6425c"/>
 				<textElement>
 					<font isBold="false"/>
 				</textElement>
 				<text><![CDATA[total_a_pagar]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="597" y="0" width="199" height="18" forecolor="#000000" uuid="91c20d43-cc2d-4205-b268-bfc1f1fa68ba"/>
+				<reportElement style="Column header" x="597" y="0" width="199" height="18" forecolor="#000000" uuid="0331a370-f70c-4103-b4a1-e53124c51692"/>
 				<textElement>
 					<font isBold="false"/>
 				</textElement>
@@ -136,28 +136,28 @@
 			<frame>
 				<reportElement style="Row" mode="Opaque" x="0" y="0" width="797" height="18" uuid="34a2ae4b-4055-476b-8676-d499f6af510b"/>
 				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" positionType="Float" x="0" y="0" width="199" height="18" uuid="659b1f82-455f-4235-a1c5-b9d6d2d59753"/>
+					<reportElement style="Detail" positionType="Float" x="0" y="0" width="199" height="18" uuid="7fe82922-7c58-4401-858e-631b69592070"/>
 					<textElement>
 						<font size="14"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{id_pedido}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" positionType="Float" x="199" y="0" width="199" height="18" uuid="c6f715cd-5393-488a-9265-ce50c8896eb5"/>
+					<reportElement style="Detail" positionType="Float" x="199" y="0" width="199" height="18" uuid="75d042b2-b6e8-4c63-9050-5481ee5aae18"/>
 					<textElement>
 						<font size="14"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{id_cliente}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" positionType="Float" x="398" y="0" width="199" height="18" uuid="6198842c-bbec-4d92-b655-4cc7a16b1c1c"/>
+					<reportElement style="Detail" positionType="Float" x="398" y="0" width="199" height="18" uuid="d38660fd-c945-4498-8145-705f6c8702b3"/>
 					<textElement>
 						<font size="14"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{total_a_pagar}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" positionType="Float" x="597" y="0" width="199" height="18" uuid="f8640846-4ef7-4d30-8c50-04634cd566fe"/>
+					<reportElement style="Detail" positionType="Float" x="597" y="0" width="199" height="18" uuid="cfa50993-6f1a-4193-a709-a0e52317ed19"/>
 					<textElement>
 						<font size="14"/>
 					</textElement>
