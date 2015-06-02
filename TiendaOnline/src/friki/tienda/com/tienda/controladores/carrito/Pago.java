@@ -12,6 +12,10 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.codehaus.jettison.json.JSONObject;
 
+import friki.tienda.com.Persistencia.Articulo;
+import friki.tienda.com.Persistencia.Pedido;
+import friki.tienda.com.daogenerico.GenericDAO;
+import friki.tienda.com.daogenerico.IGenericDAO;
 import friki.tienda.com.tienda.beans.PagoBean;
 
 public class Pago extends Action {
@@ -47,13 +51,28 @@ public class Pago extends Action {
 		
 		if (err == ""){
 			
-			// marcar en la BBDD el pedido como pagado ...
+			// marcar en la BBDD el pedido como pagado
+
+			IGenericDAO<Integer, Pedido> pedidoDAO = new GenericDAO<Integer,Pedido>();
 			
+			Pedido sessionPedido = (Pedido) request.getSession().getAttribute("pedido");
+			int idPedido = sessionPedido.getIdPedido();
+			
+			Pedido pedido2 = new Pedido();
+			pedido2.setIdPedido(idPedido);
+			Pedido pedido = pedidoDAO.findByKey(pedido2, Integer.class);
+			
+			pedido.setEstado("pagado");
+			pedidoDAO.update(pedido);
+			
+			// Limpiar la sesion			
+
 			HttpSession sesion = request.getSession(true);
 			sesion.invalidate();
 			
-			//return mapping.findForward("finPago");
-			builder.append("{\"redireccionamiento\":\"finPago.jsp\"}");
+			// redireccionar a fin compra
+			//return mapping.findForward("finCompra");
+			builder.append("{\"redireccionamiento\":\"finCompra.jsp\"}");
 
 		}else{
 			
