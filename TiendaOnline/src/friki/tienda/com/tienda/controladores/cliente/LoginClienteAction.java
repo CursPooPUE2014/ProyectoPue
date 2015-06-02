@@ -3,6 +3,7 @@ package friki.tienda.com.tienda.controladores.cliente;
 
 import java.io.PrintWriter;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -64,7 +65,7 @@ public class LoginClienteAction extends Action {
 	}
 	
 	private String pagRedirect(){
-		// segun de donde vengamos redirigimos a una página o a otra		
+		// redirigimos según haya carrito o no	
 		return null;
 	}
 }
