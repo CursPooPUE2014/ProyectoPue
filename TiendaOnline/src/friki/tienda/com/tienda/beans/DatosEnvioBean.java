@@ -2,7 +2,7 @@ package friki.tienda.com.tienda.beans;
 
 import org.apache.struts.action.ActionForm;
 
-public class DatosEnviosBean extends ActionForm{
+public class DatosEnvioBean extends ActionForm{
 	private static final long serialVersionUID = 1L;
 	
 	private String nombre;
@@ -13,7 +13,7 @@ public class DatosEnviosBean extends ActionForm{
 	private String cp;
 	private String telefono;
 	
-	public DatosEnviosBean(String nombre, String apellidos, String direccion,
+	public DatosEnvioBean(String nombre, String apellidos, String direccion,
 			String pais, String poblacion, String cp, String telefono) {
 		this.nombre = nombre;
 		this.apellidos = apellidos;
