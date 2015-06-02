@@ -27,6 +27,9 @@ public class ClienteBean extends ActionForm{
 	public int getId_usuario() {
 		return id_usuario;
 	}
+	public void setId_usuario(int id_usuario) {
+		this.id_usuario = id_usuario;
+	}
 	public String getNombre() {
 		return nombre;
 	}
@@ -57,6 +60,7 @@ public class ClienteBean extends ActionForm{
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
+	
 	public String preValidar() {
 		String errores = "";
 		

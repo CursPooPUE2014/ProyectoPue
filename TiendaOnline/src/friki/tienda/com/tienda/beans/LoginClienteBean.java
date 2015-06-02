@@ -2,9 +2,14 @@ package friki.tienda.com.tienda.beans;
 
 import org.apache.struts.action.ActionForm;
 
+import friki.tienda.com.tienda.accesDAO.ClienteDAO;
 import friki.tienda.com.tienda.beans.ClienteBean;
 import friki.tienda.com.tienda.utilities.UtilitiesTienda;
+import friki.tienda.com.Persistencia.Usuarioscliente;
+import friki.tienda.com.daogenerico.IGenericDAO;
 import friki.tienda.com.global.services.Md5Encryption;
+
+import java.util.List;
 
 public class LoginClienteBean extends ActionForm{
 	private static final long serialVersionUID = 1L;
@@ -58,19 +63,28 @@ public class LoginClienteBean extends ActionForm{
 	}
 
 	public ClienteBean exist(){
-		ClienteBean res = null;
+		ClienteDAO<Integer, Usuarioscliente> dao =  new ClienteDAO<Integer, Usuarioscliente>();
+		List<Usuarioscliente> lista;
+		lista = dao.findByLogin(Usuarioscliente.class, email, contrasenya);
 		
 		try {
-			contrasenya = pwdEnc.encrypt(contrasenya);
+			contrasenya = pwdEnc.encrypt(contrasenya);	
 		} catch (Exception e) {
 			e.printStackTrace();
 			// si se produce error retornamos nulo
 			return null;
 		} 
-		// consulto a la BBDD
-		// si el user existe retorno el objeto
-		String query = "SELECT * FROM usuarioscliente where email = \"" + email +
-				"\" and contrasenya = \""  + contrasenya + "\"";
-		return res;	
+		if(lista != null && lista.size() > 0){
+			Usuarioscliente usuario = lista.get(0);
+			ClienteBean cliente = new ClienteBean(
+					usuario.getNombre(), usuario.getContrasenya(),
+					usuario.getDirPostal(), usuario.getEmail()
+					);
+			cliente.setId_usuario(usuario.getIdUsuario());
+			return cliente;
+		} else {
+			return null;
+		}
+		
 	}
 }

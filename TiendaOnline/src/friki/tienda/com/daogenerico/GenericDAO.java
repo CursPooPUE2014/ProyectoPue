@@ -36,17 +36,14 @@ import org.springframework.transaction.annotation.Propagation;
  * transacciones y serán de sólo lectura 
  */
 
-
 public class GenericDAO<K,T extends IPersistent<K>> implements IGenericDAO<K,T> {		
 	
 	//private Class<T> claseDePersistencia;
 	
 	EntityManager manager;
 	
-	private void load(){
-		
-		manager = ConnectionHelper.getInstance().getEntityManager();
-		
+	private void load(){	
+		manager = ConnectionHelper.getInstance().getEntityManager();		
 	}
 	
 	private void close(){
