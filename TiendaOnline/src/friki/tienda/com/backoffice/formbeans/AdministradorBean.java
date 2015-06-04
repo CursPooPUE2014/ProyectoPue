@@ -1,8 +1,11 @@
 package friki.tienda.com.backoffice.formbeans;
 
+import java.io.Serializable;
+
 import org.apache.struts.action.ActionForm;
 
-public class AdministradorBean extends ActionForm{
+public class AdministradorBean extends ActionForm {
+	private static final long serialVersionUID = 1L;
 	private int idUsuario;
 	private String email;
 	private String contrasenya;
@@ -43,5 +46,32 @@ public class AdministradorBean extends ActionForm{
 	public void setRol(String rol) {
 		this.rol = rol;
 	}
+	
+	public String preValidar(int idUsuario, String email, String contrasenya,
+			String rol, String poblacion, String cp, String telefono){			
+		
+		String errores = "";
+		
+		if (idUsuario==0) {
+			errores += "indique su id</br>";
+		}
+		
+		if (email == null || email.equals("")) {
+			errores += "indique sus correo</br>";
+		}
+
+		if (contrasenya == null || contrasenya.equals("")) {
+			errores += "indique su contrasenya</br>";
+		}
+		
+		if (rol == null || rol.equals("")) {
+			errores += "indique su rol</br>";
+		}
+
+		
+		
+		return errores;
+	}
+	
 
 }
