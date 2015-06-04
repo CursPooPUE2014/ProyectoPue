@@ -10,8 +10,6 @@ import java.util.List;
 
 public class UtilitiesJSON {
 
-	
-
 	public static <T> List<T> jsonArrayReader(JSONObject json)
 			throws JSONException {
 
