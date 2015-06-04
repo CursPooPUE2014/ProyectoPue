@@ -23,7 +23,6 @@ public class UtilitiesJSON {
 			listObj.add(obj);
 			i++;
 		}
-
 		return (List<T>) listObj;
 	}
 
