@@ -74,4 +74,11 @@ public class UsuarioclienteBean extends ActionForm{
 		this.telefono = telefono;
 	}
 
+	@Override
+	public String toString() {
+		String mensaje="El usuario cliente: "+getNombre()+" tiene clave: "+getIdUsuario()+" con correo: "+getEmail()+" telefono: "+getTelefono()+
+				" y dirección: " + getDirPostal();
+        return mensaje;
+		
+	}
 }
