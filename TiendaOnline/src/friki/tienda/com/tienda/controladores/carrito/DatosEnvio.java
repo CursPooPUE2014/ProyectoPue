@@ -11,6 +11,9 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.codehaus.jettison.json.JSONObject;
 
+import friki.tienda.com.Persistencia.Pedido;
+import friki.tienda.com.daogenerico.GenericDAO;
+import friki.tienda.com.daogenerico.IGenericDAO;
 import friki.tienda.com.tienda.beans.DatosEnvioBean;
 
 public class DatosEnvio extends Action {
@@ -50,6 +53,31 @@ public class DatosEnvio extends Action {
 		StringBuilder builder = new StringBuilder();
 				
 		if (err == ""){
+		// grabar datos en pedido
+			
+			IGenericDAO<Integer, Pedido> pedidoDAO = new GenericDAO<Integer,Pedido>();
+			
+			Pedido sessionPedido = (Pedido) request.getSession().getAttribute("pedido");
+			int idPedido = sessionPedido.getIdPedido();
+			
+			Pedido pedido2 = new Pedido();
+			pedido2.setIdPedido(idPedido);
+			Pedido pedido = pedidoDAO.findByKey(pedido2, Integer.class);
+			
+		/*  Actualización de los campos de envío 
+		 *  pendientes de incluir en la tabla Pedido.	
+			
+			pedido.setNombre(nombre);
+			pedido.setApellidos(apellidos);
+			pedido.setDireccion(direccion);
+			pedido.setPais(pais);
+			pedido.setPoblacion(poblacion);
+			pedido.setCp(cp);
+			pedido.setTelefono(telefono);
+		*/
+			
+			pedidoDAO.update(pedido);				
+			
 		//	return mapping.findForward("pago");
 			builder.append("{\"redireccionamiento\":\"pago.jsp\"}");
 		}else{

@@ -31,6 +31,7 @@ public class VerCarrito extends Action {
 		
 		
 		StringBuilder builder = new StringBuilder();
+		builder.append("{\"lineasPedido\":[");
 		for (Lineaspedido lineaPedido : lineasPedido) {
 			builder.append("{\"idPedido\":\"").
 						append(lineaPedido.getPedido().getIdPedido()).
@@ -44,8 +45,9 @@ public class VerCarrito extends Action {
 						append(lineaPedido.getCantidad()).
 					append("\",\"precio\":\"").
 						append(lineaPedido.getPrecio()).
-					append("\"}");
+					append("\"},");
 		}
+		builder.replace(builder.length()-1, builder.length(), "]");
 		builder.append(",{\"redireccionamiento\":\"verCarrito.jsp\"}");
 				
 		request.setAttribute("lineasPedidosJSON", builder.toString());		

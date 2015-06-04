@@ -2,6 +2,7 @@ package friki.tienda.com.tienda.beans;
 
 import org.apache.struts.action.ActionForm;
 
+import friki.tienda.com.Persistencia.Usuarioscliente;
 import friki.tienda.com.tienda.utilities.UtilitiesTienda;
 
 public class ClienteBean extends ActionForm{
@@ -73,6 +74,10 @@ public class ClienteBean extends ActionForm{
 		} else {
 			if(!UtilitiesTienda.isValidEmailAddress(email)){
 				errores = errores + "indique un e-mail válido</br>";
+			} else {
+				if(!existEmail()){
+					errores = errores + "El e-mail ya existe en la base de datos</br>";
+				}
 			}
 		}
 
@@ -94,6 +99,16 @@ public class ClienteBean extends ActionForm{
 			errores = errores + "indique un teléfono válido</br>";
 		}
 		return errores;
+	}
+	
+	private boolean existEmail(){
+		// comprueba si el email existe en la tabla Usuarioscliente
+		return false;		
+	}
+	
+	public void save() {
+		// llamar al daogeneric
+		
 	}
 
 }
