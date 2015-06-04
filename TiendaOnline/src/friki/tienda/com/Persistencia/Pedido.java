@@ -39,7 +39,12 @@ public class Pedido implements Serializable, IPersistent<Integer> {
 	@OneToMany(mappedBy="pedido")
 	private List<Lineaspedido> lineaspedidos;
 
-	public Pedido() {
+	public Pedido(int id) {
+		this.idPedido=id;
+	}
+	
+	
+	public Pedido(){
 	}
 
 	public int getIdPedido() {
