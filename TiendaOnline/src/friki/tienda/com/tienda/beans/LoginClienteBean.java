@@ -62,7 +62,7 @@ public class LoginClienteBean extends ActionForm{
 		return errores;
 	}
 
-	public ClienteBean exist(){
+	public Usuarioscliente exist(){
 		ClienteDAO<Integer, Usuarioscliente> dao =  new ClienteDAO<Integer, Usuarioscliente>();
 		List<Usuarioscliente> lista;
 		lista = dao.findByLogin(Usuarioscliente.class, email, contrasenya);
@@ -76,12 +76,9 @@ public class LoginClienteBean extends ActionForm{
 		} 
 		if(lista != null && lista.size() > 0){
 			Usuarioscliente usuario = lista.get(0);
-			ClienteBean cliente = new ClienteBean(
-					usuario.getNombre(), usuario.getContrasenya(),
-					usuario.getDirPostal(), usuario.getEmail()
-					);
-			cliente.setId_usuario(usuario.getIdUsuario());
-			return cliente;
+			//ClienteBean cliente = new ClienteBean(usuario);
+			//cliente.setId_usuario(usuario.getIdUsuario());
+			return usuario;
 		} else {
 			return null;
 		}

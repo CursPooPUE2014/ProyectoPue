@@ -3,7 +3,6 @@ package friki.tienda.com.tienda.controladores.cliente;
 
 import java.io.PrintWriter;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -14,8 +13,8 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.codehaus.jettison.json.JSONObject;
 
+import friki.tienda.com.Persistencia.Usuarioscliente;
 import friki.tienda.com.tienda.beans.LoginClienteBean;
-import friki.tienda.com.tienda.beans.ClienteBean;
 
 public class LoginClienteAction extends Action {
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
@@ -41,18 +40,25 @@ public class LoginClienteAction extends Action {
 		if(err != null){
 			js.accumulate("errores",err);
 		} else {
-			ClienteBean cliente = usuario.exist();
+			// creamos un Usuariocliente (persistencia) con los datos del formbean
+			Usuarioscliente cliente = usuario.exist();
 			// si el cliente es nulo añadimos al json msg de error
 			// si no cargamos el usuario en la sesion
 			if(cliente == null){
 				js.accumulate("errores","Usuario o contraseña incorrecto");
 			} else {
+				// pendiente obtener la página de la request
+				// si la debemos retornar debería pasarse en un
+				// campo oculto del form
+				String pag = "";
+				js.accumulate("errores","");
+				js.accumulate("cliente",cliente);
+				js.accumulate("pagina",pag);
 				// cargo el cliente en la sesion
 				HttpSession sesion = request.getSession(true);
 				sesion.setAttribute("cliente", cliente);
 			}
 		}
-
 		 
 		PrintWriter pw = response.getWriter();
 		//pw.write("({\"listaObjetos\":" + js.toString() + "})");
@@ -61,11 +67,7 @@ public class LoginClienteAction extends Action {
 		pw.close();
 
 		return null;
-		
 	}
 	
-	private String pagRedirect(){
-		// redirigimos según haya carrito o no	
-		return null;
-	}
+
 }

@@ -42,6 +42,7 @@ public class RegistroClienteAction extends Action {
 		if(err != null){
 			js.accumulate("errores",err);
 		} else {
+			cliente.save();
 			// si ha habido error al crear el cliente en la BBDD cargamos error en el json
 			// si no cargamos el usuario en la sesion
 			/*
