@@ -7,6 +7,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import friki.tienda.com.Persistencia.Articulo;
+import friki.tienda.com.tienda.utilities.*;
 
 public class TestJsonArrayArticulos {
 
@@ -18,7 +19,7 @@ public class TestJsonArrayArticulos {
 		Articulo art2 = new Articulo();
 
 		List<Articulo> listArt = new ArrayList<Articulo>();
-
+		//creem dos articles  a partir de JavaBeans
 		art.setNombre("Star TShirt");
 		art.setCategoria("Camiseta");
 		art.setDescripcion("Camiseta de Star Wars Muy Freak");
@@ -34,55 +35,25 @@ public class TestJsonArrayArticulos {
 		art2.setImagen("url2");
 		art2.setPrecio(19.99);
 		art2.setNovedad("NO");
-
+		//afegim  els articles a la llista
 		listArt.add(art);
 		listArt.add(art2);
-		
+
 		System.out.println(art.getNombre());
 		System.out.println(art2.getNombre());
 
-		json = jsonArrayGenerator(listArt);
-
-		List<Articulo> listArt2 = jsonArrayReader(json);
+		//passem a array a objecte json
+		json = UtilitiesJSON.jsonArrayGenerator(listArt);
 		
-		art = listArt2.get(0);
-		art2 = listArt2.get(1);
-		
-		System.out.println(art.getNombre());
-		System.out.println(art2.getNombre());
+		// passem objecte json a array de java
+		List<Articulo> listArt2 = UtilitiesJSON.jsonArrayReader(json);
 
-	}
-
-	private static List<Articulo> jsonArrayReader(JSONObject json)
-			throws JSONException {
-
-		List<Articulo> listArt = new ArrayList<Articulo>();
-		Articulo art = null;
-
-		int i = 0;
-
-		while (!json.isNull("llave" + i)) {
-			art = (Articulo) json.get("llave" + i);
-			listArt.add(art);
-			i++;
+		//comprovem que es s'ha obtingut correctament de nou els elements del array
+		for (Articulo ar : listArt2) {			
+			System.out.println(ar.getNombre()+"-"+ar.getPrecio()+"-"+ar.getTipoDeProducto());						
 		}
 
-		return listArt;
 	}
 
-	private static JSONObject jsonArrayGenerator(List<Articulo> llista)
-			throws JSONException {
-
-		int i = 0;
-		JSONObject json = new JSONObject();
-
-		for (Object obj : llista) {
-
-			json.put("llave" + i, obj);
-			i++;
-		}
-		return json;
-
-	}
 
 }
