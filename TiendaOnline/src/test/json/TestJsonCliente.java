@@ -22,7 +22,7 @@ public class TestJsonCliente {
 
 		UsuarioclienteBean usb1 = new UsuarioclienteBean();
 
-		// rellenamos un Articulo a mano
+		// rellenamos un Cliente a mano
 		usb1.setIdUsuario(1);
 		usb1.setNombre("Albert");
 		usb1.setEmail("alberturi@gmail.com");
@@ -30,7 +30,7 @@ public class TestJsonCliente {
 		usb1.setDirPostal("Av/Diagonal 120");
 		usb1.setTelefono(610294678);
 		
-		// Imprimimos Nombre Articulo por pantalla
+		// Imprimimos tostring por pantalla
 		System.out.println(usb1);
 
 		JSONObject json = new JSONObject();
@@ -38,7 +38,7 @@ public class TestJsonCliente {
 		// Se transforma en JsonObject
 		json.put("cliente1", usb1);
 
-		// Recuperamos el Artículo a partir del JsonObject y imprimimos Nombre
+		// Recuperamos el Cliente a partir del JsonObject y imprimimos todos lo datos
 		// por pantalla
 		UsuarioclienteBean usb2 = (UsuarioclienteBean) json.get("prueba");
 
