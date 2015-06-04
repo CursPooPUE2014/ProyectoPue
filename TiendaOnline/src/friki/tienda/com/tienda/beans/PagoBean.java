@@ -1,6 +1,7 @@
 package friki.tienda.com.tienda.beans;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.apache.struts.action.ActionForm;
 
@@ -41,6 +42,8 @@ public class PagoBean extends ActionForm{
 		
 		if (numTarjeta == null || numTarjeta.equals("")) {
 			errores += "indique el número de la tarjeta</br>";
+		} else if (!isNumeric(numTarjeta) || numTarjeta.length() != 16){
+			errores += "el número de la tarjeta es incorrecto</br>";
 		}
 
 		if (fechaCad == null || fechaCad.equals("")) {
@@ -48,11 +51,15 @@ public class PagoBean extends ActionForm{
 		} else {
 			 if (!isDate(fechaCad)) {
 				 errores += "fecha incorrecta</br>";
+		     } else if (!fechaSup(fechaCad)) {
+		    	 errores += "fecha de caducidad no es superior a la fecha actual</br>";
 		     }
 		}
 				
 		if (numSecreto == null || numSecreto.equals("")) {
 			errores += "indique el número secreto</br>";
+		} else if (!isNumeric(numSecreto) || numSecreto.length() != 4){
+			errores += "el número secreto es incorrecto</br>";
 		}
 		return errores;
 	}
@@ -66,5 +73,28 @@ public class PagoBean extends ActionForm{
         }
         return true;
     }
-		
+	
+    public boolean fechaSup(String fecha) {
+        try {
+        	Date fechaActual = new Date();
+        	SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+        	Date fechaCad = formatoFecha.parse(fecha);
+        	if (fechaActual.compareTo(fechaCad) == 1){
+        		return false;
+        	}
+        }catch (Exception e) {
+            return false;
+        }
+		return true;
+    }
+    
+    private static boolean isNumeric(String cadena){
+    	try {
+    		Integer.parseInt(cadena);
+    		return true;
+    	} catch (NumberFormatException nfe){
+    		return false;
+    	}
+    }
+    
 }
