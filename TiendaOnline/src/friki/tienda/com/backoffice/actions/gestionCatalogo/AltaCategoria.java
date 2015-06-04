@@ -5,56 +5,53 @@ import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.json.JSONException;
 import org.json.JSONObject;
-import friki.tienda.com.Persistencia.Articulo;
+
+import friki.tienda.com.Persistencia.Categoria;
 import friki.tienda.com.daogenerico.GenericDAO;
 import friki.tienda.com.daogenerico.IGenericDAO;
 
-public class EditarArticulo extends Action {
+public class AltaCategoria extends Action {
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
-			HttpServletRequest req, HttpServletResponse resp) {
+			HttpServletRequest req, HttpServletResponse resp)
+			throws JSONException {
+
+		JSONObject json = new JSONObject();
 
 		resp.setContentType("application/json");
 
-		PrintWriter out;
+		PrintWriter out = null;
 
 		try {
-
-			// Obtenemos json con lista categorias de la request (Viene de
-			// LeeCategorias)
-
-			JSONObject json = (JSONObject) req.getAttribute("json");
-
 			out = resp.getWriter();
 
-			// De aqui se reciben los nuevos campos de la categoria desde un
-			// formulario.
+			Categoria cat = (Categoria) form;
+			IGenericDAO<Integer, Categoria> catdao = new GenericDAO<Integer, Categoria>();
 
-			IGenericDAO<Integer, Articulo> artdao = new GenericDAO<Integer, Articulo>();
+			catdao.save(cat);
 
-			Articulo art = (Articulo) json.get("articulo");
+			json.put("mens",
+					"Categoría añadida con ID: " + cat.getIdCategoria());
 
-			if (art != null) {
+		} catch (IOException | JSONException e) {
 
-				artdao.update(art);
+			json.put("mens", "Error! Categoría NO añadida");
+		}
 
-				json.put("mens", "Articulo " + art.getNombre()
-						+ "Editado Correctamente");
-
-			} else {
-				json.put("mens", "Error Editando Artículo!");
-			}
+		finally {
 
 			out.println(json);
 			out.flush();
 
-		} catch (IOException | JSONException e) {
 		}
+
 		return null;
+
 	}
 }

@@ -15,46 +15,43 @@ import friki.tienda.com.Persistencia.Articulo;
 import friki.tienda.com.daogenerico.GenericDAO;
 import friki.tienda.com.daogenerico.IGenericDAO;
 
-public class EditarArticulo extends Action {
+public class AltaArticulo extends Action {
+
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
-			HttpServletRequest req, HttpServletResponse resp) {
+			HttpServletRequest req, HttpServletResponse resp)
+			throws JSONException {
+
+		JSONObject json = new JSONObject();
 
 		resp.setContentType("application/json");
 
-		PrintWriter out;
+		PrintWriter out = null;
 
 		try {
-
-			// Obtenemos json con lista categorias de la request (Viene de
-			// LeeCategorias)
-
-			JSONObject json = (JSONObject) req.getAttribute("json");
-
+			
 			out = resp.getWriter();
 
-			// De aqui se reciben los nuevos campos de la categoria desde un
-			// formulario.
+			Articulo art = (Articulo) form;
 
 			IGenericDAO<Integer, Articulo> artdao = new GenericDAO<Integer, Articulo>();
 
-			Articulo art = (Articulo) json.get("articulo");
+			artdao.save(art);
 
-			if (art != null) {
+			json.put("mens", "Artículo añadido con ID: " + art.getIdArticulo());
 
-				artdao.update(art);
+		} catch (IOException | JSONException e) {
 
-				json.put("mens", "Articulo " + art.getNombre()
-						+ "Editado Correctamente");
+			json.put("mens", "Error! Artículo NO añadido");
+		}
 
-			} else {
-				json.put("mens", "Error Editando Artículo!");
-			}
+		finally {
 
 			out.println(json);
 			out.flush();
 
-		} catch (IOException | JSONException e) {
 		}
+
 		return null;
+
 	}
 }
