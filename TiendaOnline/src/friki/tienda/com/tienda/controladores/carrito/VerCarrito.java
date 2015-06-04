@@ -1,5 +1,6 @@
 package friki.tienda.com.tienda.controladores.carrito;
 
+import java.io.PrintWriter;
 import java.util.List;
 
 import org.apache.struts.action.Action;
@@ -16,7 +17,7 @@ public class VerCarrito extends Action {
 
 	public ActionForward execute(ActionMapping mapping, 
 			ActionForm form,
-			HttpServletRequest request, HttpServletResponse response) 
+			HttpServletRequest request, HttpServletResponse response) throws Exception 
 	{
 		
 		response.setContentType("application/json");
@@ -48,11 +49,18 @@ public class VerCarrito extends Action {
 					append("\"},");
 		}
 		builder.replace(builder.length()-1, builder.length(), "]");
-		builder.append(",{\"redireccionamiento\":\"verCarrito.jsp\"}");
+		builder.append(",{\"page_redirect\":\"verCarrito.jsp\"}");
 				
-		request.setAttribute("lineasPedidosJSON", builder.toString());		
+		request.setAttribute("json", builder.toString());		
+	
+	/*	PrintWriter pw = response.getWriter();
+		pw.write(builder.toString());
+		pw.flush();
+		pw.close();
+	*/
 		
 	//  return mapping.findForward("verCarrito");		
+		
 		return null;
 	
 	}

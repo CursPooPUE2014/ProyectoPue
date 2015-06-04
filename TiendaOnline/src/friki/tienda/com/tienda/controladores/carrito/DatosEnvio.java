@@ -38,19 +38,20 @@ public class DatosEnvio extends Action {
 				direccion, pais, poblacion, cp, telefono);		
 				
 		// creamos objeto json que enviaremos en la response
-		JSONObject js = new JSONObject();
+		///JSONObject js = new JSONObject();
 		
 		// vemos si se han introducido datos correctos en el form
 		String err = datosEnvio.preValidar(nombre, apellidos, direccion, pais, poblacion, cp, telefono);
 				
-		js.accumulate("errores",err);
+		///js.accumulate("errores",err);
 		
-		PrintWriter pw = response.getWriter();
-		pw.write(err);
-		pw.flush();
-		pw.close();
+  	///	PrintWriter pw = response.getWriter();
+	///	pw.write(err);		
+	///	pw.flush();
+	/// pw.close();
 		
 		StringBuilder builder = new StringBuilder();
+		builder.append("{\"errores\":"+err+"},");
 				
 		if (err == ""){
 		// grabar datos en pedido
@@ -79,13 +80,17 @@ public class DatosEnvio extends Action {
 			pedidoDAO.update(pedido);				
 			
 		//	return mapping.findForward("pago");
-			builder.append("{\"redireccionamiento\":\"pago.jsp\"}");
+			builder.append("{\"page_redirect\":\"pago.jsp\"}");
 		}else{
 		//	return mapping.findForward("datosEnvio");
-			builder.append("{\"redireccionamiento\":\"datosEnvio.jsp\"}");
+			builder.append("{\"page_redirect\":\"datosEnvio.jsp\"}");
 		}
 		
-		request.setAttribute("redireccionamiento", builder.toString());	
+		request.setAttribute("json", builder.toString());	
+	///	pw.write(builder.toString());
+	///	pw.flush();
+	///	pw.close();
+		
 		return null;
 
 	}

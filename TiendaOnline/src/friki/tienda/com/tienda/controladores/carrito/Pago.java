@@ -35,19 +35,20 @@ public class Pago extends Action {
 		PagoBean pago = new PagoBean(numTarjeta, fechaCad, numSecreto);
 		
 		// creamos objeto json que enviaremos en la response
-		JSONObject js = new JSONObject();
+	///	JSONObject js = new JSONObject();
 		
 		// vemos si se han introducido datos correctos en el form
 		String err = pago.preValidar(numTarjeta, fechaCad, numSecreto);
 		
-		js.accumulate("errores",err);
+	///	js.accumulate("errores",err);
 		
-		PrintWriter pw = response.getWriter();
+	/*	PrintWriter pw = response.getWriter();
 		pw.write(err);
-		pw.flush();
-		pw.close();
+		pw.flush(); */
+	//	pw.close();
 		
 		StringBuilder builder = new StringBuilder();
+		builder.append("{\"errores\":"+err+"},");
 		
 		if (err == ""){
 			
@@ -72,15 +73,19 @@ public class Pago extends Action {
 			
 			// redireccionar a fin compra
 			//return mapping.findForward("finCompra");
-			builder.append("{\"redireccionamiento\":\"finCompra.jsp\"}");
+			builder.append("{\"page_redirect\":\"finCompra.jsp\"}");
 
 		}else{
 			
 			//return mapping.findForward("pago");
-			builder.append("{\"redireccionamiento\":\"pago.jsp\"}");
+			builder.append("{\"page_redirect\":\"pago.jsp\"}");
 		}
 		
-		request.setAttribute("redireccionamiento", builder.toString());	
+		request.setAttribute("json", builder.toString());	
+	///	pw.write(builder.toString());
+	///	pw.flush();
+	///	pw.close();
+		
 		return null;
 
 	}

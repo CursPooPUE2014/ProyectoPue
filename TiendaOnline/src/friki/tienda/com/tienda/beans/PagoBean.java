@@ -66,7 +66,7 @@ public class PagoBean extends ActionForm{
 	
     public boolean isDate(String fecha) {
         try {
-            SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
             formatoFecha.parse(fecha);
         } catch (Exception e) {
             return false;
@@ -77,7 +77,7 @@ public class PagoBean extends ActionForm{
     public boolean fechaSup(String fecha) {
         try {
         	Date fechaActual = new Date();
-        	SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+        	SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
         	Date fechaCad = formatoFecha.parse(fecha);
         	if (fechaActual.compareTo(fechaCad) == 1){
         		return false;
