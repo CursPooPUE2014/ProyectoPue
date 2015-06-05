@@ -40,11 +40,11 @@ public class AltaUsuariocliente extends Action {
 
 				clientdao.save(usuclient);
 
-				json.put("mens", "Artículo añadido con ID: " + usuclient.getIdUsuario());
+				json.put("mens", "Cliente añadido con ID: " + usuclient.getIdUsuario());
 
 			} catch (IOException | JSONException e) {
 
-				json.put("mens", "Error! Artículo NO añadido");
+				json.put("mens", "Error! Cliente NO añadido");
 			}
 
 			finally {
