@@ -107,7 +107,7 @@ public class DatosEnvioBean extends ActionForm{
 			errores += "indique su poblacion</br>";
 		}
 				
-		// nota: expresiones regulares obtenidas de
+		// nota: expresiones regulares obtenidas de 
 		// http://web.ontuts.com/snippets/10-expresiones-regulares-imprescindibles-en-desarrollo-web/
 		if (cp == null || cp.equals("")) {
 			errores += "indique su código postal</br>";
