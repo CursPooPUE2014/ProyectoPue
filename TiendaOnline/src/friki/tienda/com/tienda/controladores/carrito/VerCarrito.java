@@ -20,22 +20,18 @@ public class VerCarrito extends Action {
 			ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) throws Exception 
 	{
-		
 		response.setContentType("application/json");
 		PrintWriter out = response.getWriter();
 		JSONObject json = new JSONObject();
 		
 		@SuppressWarnings("unchecked")
-		List<Lineaspedido> lineasPedido = 
-				(List<Lineaspedido>) request.getSession().getAttribute("lineasPedido");
+		List<Lineaspedido> lineaspedido = 
+				(List<Lineaspedido>) request.getSession().getAttribute("Lineaspedido");
 		
-		json.put("lineasPedido", lineasPedido);
+		json.put("lineaspedido", lineaspedido);
 		
 		out.println(json.toString());
 		out.close();
-	
 		return null;
-	
 	}
-		
 }

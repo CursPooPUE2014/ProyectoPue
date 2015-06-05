@@ -1,3 +1,4 @@
+
 package friki.tienda.com.tienda.beans;
 
 import java.text.SimpleDateFormat;
