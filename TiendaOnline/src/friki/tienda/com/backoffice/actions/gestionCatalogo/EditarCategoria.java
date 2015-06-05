@@ -41,10 +41,10 @@ public class EditarCategoria extends Action {
 				
 				op.update(cat);
 				
-				json.put("mens", "Categoría " + cat.getNombre() + "Editada Correctamente");
+				json.put("error", "Categoría " + cat.getNombre() + "Editada Correctamente");
 
 			} else {
-				json.put("mens", "Error Editando Categoría!");
+				json.put("error", "Error Editando Categoría!");
 			}
 
 			out.println(json);

@@ -31,26 +31,37 @@
 			type="friki.tienda.com.tienda.controladores.cliente.RegistroClienteAction">	
   		</action>	
   		
+  		<!-- ACTIONS BACKOFFICE.GESTION_CATÁLOGO -->
+  		
   		<action 
+  			path="/buscarArticulo" 
+  			type="friki.tienda.com.backoffice.actions.gestionCatalogo.BuscarArticulo">
+		</action>
+		<action 
+  			path="/editarArticulo" 
+  			name="Articulo"
+			type="friki.tienda.com.backoffice.actions.gestionCatalogo.EditarArticulo">
+		</action>
+		<action 
   			path="/altaArticulo" 
-  			name="ArticuloBean"
+  			name="Articulo"
 			type="friki.tienda.com.backoffice.actions.gestionCatalogo.AltaArticulo">
-			<forward name="correcto" path="/muestraMens.jsp" />
+		</action>
+		<action 
+			path="/leerCategorias"
+			type="friki.tienda.com.backoffice.actions.gestionCatalogo.LeerCategorias">
+		</action>
+		<action 
+			path="/editarCategoria"
+			name="Categoria"
+			type="friki.tienda.com.backoffice.actions.gestionCatalogo.EditarCategoria">
 		</action>
 		<action 
 			path="/altaCategoria" 
-			name="categoria"
+			name="Categoria"
 			type="friki.tienda.com.backoffice.actions.gestionCatalogo.AltaCategoria">
-			<forward name="correcto" path="/muestraMens.jsp" />
 		</action>
-		<action path="/buscarArticulo">
-			<forward name="encontrado" path="/editarArticulo.jsp" />
-			<forward name="noencontrado" path="/muestraMens.jsp" />
-		</action>
-		<action path="/buscarCategoria">
-			<forward name="encontrado" path="/editarCategoria.jsp" />
-			<forward name="noencontrado" path="/muestraMens.jsp" />
-		</action>
+	
 		
 	</action-mappings>
 </struts-config>
