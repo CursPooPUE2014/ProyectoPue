@@ -5,45 +5,49 @@ import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.json.JSONException;
 import org.json.JSONObject;
-import friki.tienda.com.Persistencia.Usuariosadministrador;
+
+import friki.tienda.com.Persistencia.Role;
 import friki.tienda.com.daogenerico.GenericDAO;
 import friki.tienda.com.daogenerico.IGenericDAO;
 
-public class EliminarAdministrador extends Action {
+public class EditarRol extends Action {
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest req, HttpServletResponse resp) {
-		
+
+	
 		resp.setContentType("application/json");
-		PrintWriter out = null;
+
+		PrintWriter out;
 
 		try {
-
-			// Obtenemos json con lista categorias de la request (Viene de
-			// LeeCategorias)
-
+			
+			//Obtenemos json con lista categorias de la request (Viene de LeeCategorias)
+			
 			JSONObject json = (JSONObject) req.getAttribute("json");
-
+						
 			out = resp.getWriter();
 
-			// De aqui se reciben los nuevos campos de la categoria desde un
-			// formulario.
+			//De aqui se reciben los nuevos campos de la categoria desde un formulario.
+		
+			IGenericDAO<Integer, Role> rolDao = new GenericDAO<Integer,Role>();	
+			
+			Role rolBean = (Role) json.get("rol");
 
-			IGenericDAO<Integer, Usuariosadministrador> adminDao = new GenericDAO<Integer, Usuariosadministrador>();
-
-			Usuariosadministrador adminBean = (Usuariosadministrador) json.get("Usuariosadministrador");
-
-			if (adminBean != null) {
-				adminDao.delete(adminBean);
-				json.put("mens", "Usuario eliminando correctamente!");
+			if (rolBean!=null) {
 				
+				rolDao.update(rolBean);
+				
+				json.put("mens", "Rol " + rolBean.getNombre() + "Editada Correctamente");
+
 			} else {
-				json.put("mens", "Error Eliminando Usuario!");
+				json.put("mens", "Error Editando Rol!");
 			}
 
 			out.println(json);

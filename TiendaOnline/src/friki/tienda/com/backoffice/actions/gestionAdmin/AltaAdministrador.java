@@ -16,7 +16,6 @@ import friki.tienda.com.Persistencia.Usuariosadministrador;
 import friki.tienda.com.daogenerico.GenericDAO;
 import friki.tienda.com.daogenerico.IGenericDAO;
 
-
 public class AltaAdministrador extends Action {
 
 	public ActionForward execute(ActionMapping mapping, ActionForm form,

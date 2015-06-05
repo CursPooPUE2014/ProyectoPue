@@ -11,11 +11,11 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.json.JSONException;
 import org.json.JSONObject;
-import friki.tienda.com.Persistencia.Usuariosadministrador;
+import friki.tienda.com.Persistencia.Role;
 import friki.tienda.com.daogenerico.GenericDAO;
 import friki.tienda.com.daogenerico.IGenericDAO;
 
-public class EliminarAdministrador extends Action {
+public class EliminarRol extends Action {
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest req, HttpServletResponse resp) {
 		
@@ -34,16 +34,16 @@ public class EliminarAdministrador extends Action {
 			// De aqui se reciben los nuevos campos de la categoria desde un
 			// formulario.
 
-			IGenericDAO<Integer, Usuariosadministrador> adminDao = new GenericDAO<Integer, Usuariosadministrador>();
+			IGenericDAO<Integer, Role> rolDao = new GenericDAO<Integer, Role>();
 
-			Usuariosadministrador adminBean = (Usuariosadministrador) json.get("Usuariosadministrador");
+			Role rolBean = (Role) json.get("rol");
 
-			if (adminBean != null) {
-				adminDao.delete(adminBean);
-				json.put("mens", "Usuario eliminando correctamente!");
+			if (rolBean != null) {
+				rolDao.delete(rolBean);
+				json.put("mens", "Rol eliminando correctamente!");
 				
 			} else {
-				json.put("mens", "Error Eliminando Usuario!");
+				json.put("mens", "Error Eliminando Rol!");
 			}
 
 			out.println(json);

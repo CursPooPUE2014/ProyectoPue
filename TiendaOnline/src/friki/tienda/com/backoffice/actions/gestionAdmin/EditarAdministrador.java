@@ -18,7 +18,6 @@ import friki.tienda.com.daogenerico.IGenericDAO;
 public class EditarAdministrador extends Action {
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest req, HttpServletResponse resp) {
-
 		resp.setContentType("application/json");
 
 		PrintWriter out;

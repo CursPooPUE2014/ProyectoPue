@@ -12,16 +12,15 @@ import java.io.Serializable;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import friki.tienda.com.Persistencia.Articulo;
-import friki.tienda.com.Persistencia.Usuariosadministrador;
+import friki.tienda.com.Persistencia.Role;
 import friki.tienda.com.daogenerico.GenericDAO;
 import friki.tienda.com.daogenerico.IGenericDAO;
 
-
-public class ConsultarAdministradors extends Action {
+public class AltaRol extends Action {
 
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
-			HttpServletRequest req, HttpServletResponse resp) throws JSONException {	
+			HttpServletRequest req, HttpServletResponse resp) throws JSONException {
+
 		JSONObject json = new JSONObject();
 
 		resp.setContentType("application/json");
@@ -29,29 +28,34 @@ public class ConsultarAdministradors extends Action {
 		PrintWriter out = null;
 
 		try {
+			
 			out = resp.getWriter();
 
-			Usuariosadministrador adm = (Usuariosadministrador) form;
+			Role rolBean = (Role) form;
+			
+			IGenericDAO<Integer, Role> adminDao = new GenericDAO<Integer, Role>();
 
-			IGenericDAO <Integer, Usuariosadministrador> admDao = new GenericDAO<Integer, Usuariosadministrador>();
+			adminDao.save(rolBean);
 
-			adm = admDao.findByKey(adm, Integer.class);
-
-			json.put("administrador", adm);
+			json.put("mens", "Rol añadido con ID: " + rolBean.getIdRol());
 
 		} catch (IOException | JSONException e) {
 
-			json.put("mens", "Error! Administrador NO Encontrado");
+			json.put("mens", "Error! Administrador NO añadido");
 		}
-		
+
 		finally {
-			
+
 			out.println(json);
 			out.flush();
-			
+
 		}
 
 		return null;
+
 	}
 		
+		
+
+	
 }
