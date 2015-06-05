@@ -37,14 +37,18 @@ public class BuscarArticulo extends Action {
 			IGenericDAO<Integer, Articulo> artdao = new GenericDAO<Integer, Articulo>();
 
 			art = artdao.findByKey(art, Integer.class);
+			
+			if (art != null) {
 
-			json.put("articulo", art);
+				json.put("articulo", art);
 
+			} else {
+				json.put("error", "Error Editando Artículo!");
+			}
 		
-
 		} catch (IOException | JSONException e) {
 
-			json.put("mens", "Error! Artículo NO Encontrado");
+			json.put("error", "Error! Artículo NO Encontrado");
 		}
 		
 		finally {

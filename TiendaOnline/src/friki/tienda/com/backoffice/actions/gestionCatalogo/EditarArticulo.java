@@ -17,9 +17,11 @@ import friki.tienda.com.daogenerico.IGenericDAO;
 
 public class EditarArticulo extends Action {
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
-			HttpServletRequest req, HttpServletResponse resp) {
+			HttpServletRequest req, HttpServletResponse resp) throws JSONException {
 
 		resp.setContentType("application/json");
+		
+		JSONObject json = (JSONObject) req.getAttribute("json");
 
 		PrintWriter out;
 
@@ -27,8 +29,6 @@ public class EditarArticulo extends Action {
 
 			// Obtenemos json con lista categorias de la request (Viene de
 			// LeeCategorias)
-
-			JSONObject json = (JSONObject) req.getAttribute("json");
 
 			out = resp.getWriter();
 
@@ -39,21 +39,18 @@ public class EditarArticulo extends Action {
 
 			Articulo art = (Articulo) json.get("articulo");
 
-			if (art != null) {
+			artdao.update(art);
 
-				artdao.update(art);
-
-				json.put("mens", "Articulo " + art.getNombre()
+			json.put("error", "Articulo " + art.getNombre()
 						+ "Editado Correctamente");
-
-			} else {
-				json.put("mens", "Error Editando Artículo!");
-			}
 
 			out.println(json);
 			out.flush();
 
 		} catch (IOException | JSONException e) {
+			
+			json.put("error", "Error de JASON!!");
+			
 		}
 		return null;
 	}

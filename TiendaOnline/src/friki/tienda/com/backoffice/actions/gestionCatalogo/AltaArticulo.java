@@ -37,11 +37,11 @@ public class AltaArticulo extends Action {
 
 			artdao.save(art);
 
-			json.put("mens", "Artículo añadido con ID: " + art.getIdArticulo());
+			json.put("error", "Artículo añadido con ID: " + art.getIdArticulo());
 
 		} catch (IOException | JSONException e) {
 
-			json.put("mens", "Error! Artículo NO añadido");
+			json.put("error", "Error! Artículo NO añadido");
 		}
 
 		finally {
