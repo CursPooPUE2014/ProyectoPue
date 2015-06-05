@@ -6,6 +6,7 @@ import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.codehaus.jettison.json.JSONObject;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,26 +18,21 @@ public class ComprobarLogin extends Action {
 			ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) throws Exception 
 	{
-		// Intentamos obtener el nombre del usuario si es que está ya validado
-		String sessionUser = (String) request.getSession().getAttribute("idUsuario");
+		response.setContentType("application/json");
+		PrintWriter out = response.getWriter();
+		JSONObject json = new JSONObject();
 				
-		StringBuilder builder = new StringBuilder();
+		// Intentamos obtener el nombre del usuario si es que está ya validado.
+		String sessionUser = (String) request.getSession().getAttribute("idUsuario");
 		
-		if (sessionUser == null){
-			// return mapping.findForward("login");
-			builder.append("{\"page_redirect\":\"login.jsp\"}");
+		if (sessionUser == null || sessionUser == ""){
+			json.append("page_redirect", "login.jsp");
 		}else{
-			// return mapping.findForward("datosEnvio");
-			builder.append("{\"page_redirect\":\"datosEnvio.jsp\"}");
+			json.append("page_redirect", "datosEnvio.jsp");
 		}
 		
-		request.setAttribute("json", builder.toString());	
-	/*	PrintWriter pw = response.getWriter();
-		pw.write(builder.toString());
-		pw.flush();
-		pw.close();
-	*/
-		
+		out.println(json.toString());
+		out.close();	
 		return null;
 	}
 }

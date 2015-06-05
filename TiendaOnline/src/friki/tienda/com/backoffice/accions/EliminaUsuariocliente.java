@@ -1,42 +1,61 @@
 package friki.tienda.com.backoffice.accions;
 
-//import operaciones.*;
-import org.apache.struts.action.*;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.Serializable;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import friki.tienda.com.backoffice.formbeans.UsuarioclienteBean;
+import org.apache.struts.action.Action;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import friki.tienda.com.Persistencia.Usuarioscliente;
+import friki.tienda.com.daogenerico.GenericDAO;
+import friki.tienda.com.daogenerico.IGenericDAO;
 
 public class EliminaUsuariocliente extends Action {
 
 	 public ActionForward execute(ActionMapping mapping, ActionForm form,
-			HttpServletRequest req, HttpServletResponse resp) {
+			HttpServletRequest req, HttpServletResponse resp) throws JSONException {
 		
-		resp.setContentType("application/json");
-		UsuarioclienteBean usuariocliente =(UsuarioclienteBean) form;
-	
-		//conectar amb el DAO i fer un delete del usuari
-		
-		// Get the printwriter object from response to write the required json object to the output stream
-		//cridar a la classe dao per a eliminar per id 
-		PrintWriter out;
-		try {
-			out = resp.getWriter();
-		
-			out.print("Client eliminat de manera satisfactoria");
-			out.flush();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;	//(això es necessari perquè si no retornem null, passaria el control de nou al servlet d'struts);
 
+			JSONObject json = new JSONObject();
+
+			resp.setContentType("application/json");
+
+			PrintWriter out = null;
+
+			try {
+				
+				out = resp.getWriter();
+
+				Usuarioscliente usuclient = (Usuarioscliente) form;
+
+				IGenericDAO<Integer, Usuarioscliente> clientdao = new GenericDAO<Integer, Usuarioscliente>();
+
+				clientdao.delete(usuclient);
+
+				json.put("mens", "Cliente con ID borrado: " + usuclient.getIdUsuario());
+
+			} catch (IOException | JSONException e) {
+
+				json.put("mens", "Error! Cliente NO ha podido ser borrado");
+			}
+
+			finally {
+
+				out.println(json);
+				out.flush();
+
+			}
+
+			return null;
+
+		}
 	}
-		
-}
+

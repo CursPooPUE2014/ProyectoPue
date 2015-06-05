@@ -22,10 +22,13 @@ public class DatosEnvio extends Action {
 			ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) throws Exception 
 	{
-		// establecemos tipo de respuesta json
+		// Establecemos tipo de respuesta json.
 		response.setContentType("application/json");
+		PrintWriter out = response.getWriter();
+		// Creamos objeto json que enviaremos en la response.
+		JSONObject json = new JSONObject();
 		
-		// recuperamos los parámetros de la request y creamos el objeto
+		// Recuperamos los parámetros de la request y creamos el objeto.
 		String nombre = request.getParameter("nombre");
 		String apellidos = request.getParameter("apellidos");
 		String direccion = request.getParameter("direccion");
@@ -36,26 +39,15 @@ public class DatosEnvio extends Action {
 		
 		DatosEnvioBean datosEnvio = new DatosEnvioBean(nombre, apellidos, 
 				direccion, pais, poblacion, cp, telefono);		
-				
-		// creamos objeto json que enviaremos en la response
-		///JSONObject js = new JSONObject();
-		
-		// vemos si se han introducido datos correctos en el form
+	
+		// Vemos si se han introducido datos correctos en el form.
 		String err = datosEnvio.preValidar(nombre, apellidos, direccion, pais, poblacion, cp, telefono);
-				
-		///js.accumulate("errores",err);
 		
-  	///	PrintWriter pw = response.getWriter();
-	///	pw.write(err);		
-	///	pw.flush();
-	/// pw.close();
-		
-		StringBuilder builder = new StringBuilder();
-		builder.append("{\"errores\":"+err+"},");
+		json.append("errores", err);
 				
 		if (err == ""){
-		// grabar datos en pedido
-			
+		    
+			// Grabamos los datos de envío en el pedido.
 			IGenericDAO<Integer, Pedido> pedidoDAO = new GenericDAO<Integer,Pedido>();
 			
 			Pedido sessionPedido = (Pedido) request.getSession().getAttribute("pedido");
@@ -75,24 +67,20 @@ public class DatosEnvio extends Action {
 			pedido.setPoblacion(poblacion);
 			pedido.setCp(cp);
 			pedido.setTelefono(telefono);
-		*/
-			
+		*/			
 			pedidoDAO.update(pedido);				
 			
-		//	return mapping.findForward("pago");
-			builder.append("{\"page_redirect\":\"pago.jsp\"}");
+			// Redirección a pago a fin compra.
+			json.append("page_redirect", "pago.jsp");
+			
 		}else{
-		//	return mapping.findForward("datosEnvio");
-			builder.append("{\"page_redirect\":\"datosEnvio.jsp\"}");
+
+			// Redirección a pago a fin datos envío.			
+			json.append("page_redirect", "datosEnvio.jsp");
 		}
-		
-		request.setAttribute("json", builder.toString());	
-	///	pw.write(builder.toString());
-	///	pw.flush();
-	///	pw.close();
-		
+
+		out.println(json.toString());
+		out.close();		
 		return null;
-
 	}
-
 }

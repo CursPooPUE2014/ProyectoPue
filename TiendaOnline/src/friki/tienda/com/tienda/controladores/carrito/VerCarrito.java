@@ -7,6 +7,7 @@ import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.codehaus.jettison.json.JSONObject;
 
 import friki.tienda.com.Persistencia.Lineaspedido;
 
@@ -21,46 +22,18 @@ public class VerCarrito extends Action {
 	{
 		
 		response.setContentType("application/json");
-	//	response.setContentType("text/plain");
-		
-	//	Pedido sessionPedido = (Pedido) request.getSession().getAttribute("pedido");
-	//	List<Lineaspedido> lineaspedidos = sessionPedido.getLineaspedidos();
+		PrintWriter out = response.getWriter();
+		JSONObject json = new JSONObject();
 		
 		@SuppressWarnings("unchecked")
 		List<Lineaspedido> lineasPedido = 
 				(List<Lineaspedido>) request.getSession().getAttribute("lineasPedido");
 		
+		json.put("lineasPedido", lineasPedido);
 		
-		StringBuilder builder = new StringBuilder();
-		builder.append("{\"lineasPedido\":[");
-		for (Lineaspedido lineaPedido : lineasPedido) {
-			builder.append("{\"idPedido\":\"").
-						append(lineaPedido.getPedido().getIdPedido()).
-					append("\"idArticulo\":\"").
-						append(lineaPedido.getArticulo().getIdArticulo()).
-					append("\"nombreArticulo\":\"").
-						append(lineaPedido.getArticulo().getNombre()).	
-					append("\"precioArticulo\":\"").
-						append(lineaPedido.getArticulo().getPrecio()).	
-					append("\",\"cantidad\":\"").
-						append(lineaPedido.getCantidad()).
-					append("\",\"precio\":\"").
-						append(lineaPedido.getPrecio()).
-					append("\"},");
-		}
-		builder.replace(builder.length()-1, builder.length(), "]");
-		builder.append(",{\"page_redirect\":\"verCarrito.jsp\"}");
-				
-		request.setAttribute("json", builder.toString());		
+		out.println(json.toString());
+		out.close();
 	
-	/*	PrintWriter pw = response.getWriter();
-		pw.write(builder.toString());
-		pw.flush();
-		pw.close();
-	*/
-		
-	//  return mapping.findForward("verCarrito");		
-		
 		return null;
 	
 	}
