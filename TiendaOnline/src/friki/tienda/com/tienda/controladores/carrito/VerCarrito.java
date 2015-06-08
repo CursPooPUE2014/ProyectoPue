@@ -9,7 +9,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.codehaus.jettison.json.JSONObject;
 
-import friki.tienda.com.Persistencia.Lineaspedido;
+import friki.tienda.com.Persistencia.LineaPedido;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,11 +25,13 @@ public class VerCarrito extends Action {
 		JSONObject json = new JSONObject();
 		
 		@SuppressWarnings("unchecked")
-		List<Lineaspedido> lineaspedido = 
-				(List<Lineaspedido>) request.getSession().getAttribute("Lineaspedido");
+		List<LineaPedido> lineaPedido = 
+				(List<LineaPedido>) request.getSession().getAttribute("LineaPedido");
 		
-		json.put("lineaspedido", lineaspedido);
+		json.put("LineaPedido", lineaPedido);
 		
+		json.append("page_redirect", "verCarrito.jsp");
+				
 		out.println(json.toString());
 		out.close();
 		return null;

@@ -49,8 +49,8 @@ public class Pago extends Action {
 			Pedido pedido2 = new Pedido();
 			pedido2.setIdPedido(idPedido);
 			Pedido pedido = pedidoDAO.findByKey(pedido2, Integer.class);
-			
-			pedido.setEstado("pagado");
+	
+			pedido.setIdEstado(1);
 			pedidoDAO.update(pedido);
 			
 			// Limpiar la sesión.			

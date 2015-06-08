@@ -18,69 +18,88 @@ import friki.tienda.com.tienda.beans.DatosEnvioBean;
 
 public class DatosEnvio extends Action {
 
-	public ActionForward execute(ActionMapping mapping, 
-			ActionForm form,
-			HttpServletRequest request, HttpServletResponse response) throws Exception 
-	{
+	public ActionForward execute(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
 		// Establecemos tipo de respuesta json.
 		response.setContentType("application/json");
 		PrintWriter out = response.getWriter();
 		// Creamos objeto json que enviaremos en la response.
 		JSONObject json = new JSONObject();
-		
+
 		// Recuperamos los parámetros de la request y creamos el objeto.
-		String nombre = request.getParameter("nombre");
-		String apellidos = request.getParameter("apellidos");
+		String tipoVia = request.getParameter("tipoVia");
 		String direccion = request.getParameter("direccion");
+		String numero = request.getParameter("numero");
+		String planta = request.getParameter("planta");
+		String piso = request.getParameter("piso");
+		String escalera = request.getParameter("escalera");
+		String bloque = request.getParameter("bloque");
+		String ciudad = request.getParameter("ciudad");
+		String provincia = request.getParameter("provincia");
 		String pais = request.getParameter("pais");
-		String poblacion = request.getParameter("poblacion");
-		String cp = request.getParameter("cp");
-		String telefono = request.getParameter("telefono");
-		
-		DatosEnvioBean datosEnvio = new DatosEnvioBean(nombre, apellidos, 
-				direccion, pais, poblacion, cp, telefono);		
-	
+		String codigoPostal = request.getParameter("codigoPostal");
+
+		DatosEnvioBean datosEnvio = new DatosEnvioBean(tipoVia, direccion,
+				numero, planta, piso, escalera, bloque, ciudad, provincia,
+				pais, codigoPostal);
+
 		// Vemos si se han introducido datos correctos en el form.
-		String err = datosEnvio.preValidar(nombre, apellidos, direccion, pais, poblacion, cp, telefono);
-		
+		String err = datosEnvio.preValidar(direccion, numero, ciudad,
+				provincia, pais, codigoPostal);
+
 		json.append("errores", err);
-				
-		if (err == ""){
-		    
+
+		if (err == "") {
+
 			// Grabamos los datos de envío en el pedido.
-			IGenericDAO<Integer, Pedido> pedidoDAO = new GenericDAO<Integer,Pedido>();
-			
-			Pedido sessionPedido = (Pedido) request.getSession().getAttribute("pedido");
+			IGenericDAO<Integer, Pedido> pedidoDAO = new GenericDAO<Integer, Pedido>();
+
+			Pedido sessionPedido = (Pedido) request.getSession().getAttribute(
+					"pedido");
 			int idPedido = sessionPedido.getIdPedido();
-			
+
 			Pedido pedido2 = new Pedido();
 			pedido2.setIdPedido(idPedido);
 			Pedido pedido = pedidoDAO.findByKey(pedido2, Integer.class);
-			
-		/*  Actualización de los campos de envío 
-		 *  pendientes de incluir en la tabla Pedido.	
-			
-			pedido.setNombre(nombre);
-			pedido.setApellidos(apellidos);
-			pedido.setDireccion(direccion);
-			pedido.setPais(pais);
-			pedido.setPoblacion(poblacion);
-			pedido.setCp(cp);
-			pedido.setTelefono(telefono);
-		*/			
-			pedidoDAO.update(pedido);				
-			
+
+			/*
+			 * Actualización de los campos de envío pendientes de incluir en la
+			 * tabla direccionEntrega.
+			 * 
+			 * int idDirEntrega pedido.getId_dirEntrega();
+			 * 
+			 * DireccionEntrega direccionEntrega2 = new DireccionEntrega();
+			 * direccionEntrega2.setIdDirEntrega(idDirEntrega); DireccionEntrega
+			 * dirEntrega = direccionEntregaDAO. findByKey(direccionEntrega2,
+			 * Integer.class);
+			 * 
+			 * direccionEntrega.setTipoVia(tipoVia);
+			 * direccionEntrega.setDireccion(direccion);
+			 * direccionEntrega.setNumero(numero);
+			 * direccionEntrega.setPlanta(planta);
+			 * direccionEntrega.setPiso(piso);
+			 * direccionEntrega.setEscalera(escalera);
+			 * direccionEntrega.setBloque(bloque);
+			 * direccionEntrega.setCiudad(ciudad);
+			 * direccionEntrega.setProvincia(provincia);
+			 * direccionEntrega.setPais(pais);
+			 * direccionEntrega.setCodigoPostal(codigoPostal);
+			 * 
+			 * direccionEntregaDAO.update(dirEntrega);
+			 */
+
 			// Redirección a pago a fin compra.
 			json.append("page_redirect", "pago.jsp");
-			
-		}else{
 
-			// Redirección a pago a fin datos envío.			
+		} else {
+
+			// Redirección a pago a fin datos envío.
 			json.append("page_redirect", "datosEnvio.jsp");
 		}
 
 		out.println(json.toString());
-		out.close();		
+		out.close();
 		return null;
 	}
 }
