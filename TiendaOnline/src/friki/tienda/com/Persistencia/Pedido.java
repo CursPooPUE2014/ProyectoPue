@@ -39,6 +39,10 @@ public class Pedido implements Serializable, IPersistent<Integer> {
 	public Pedido() {
 	}
 
+	public Pedido(int id) {
+		this.idPedido = id;
+	}
+
 	public int getIdPedido() {
 		return this.idPedido;
 	}
