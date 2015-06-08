@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+import org.apache.struts.action.ActionForm;
+
 import friki.tienda.com.daogenerico.IPersistent;
 
 
@@ -13,7 +15,7 @@ import friki.tienda.com.daogenerico.IPersistent;
  */
 @Entity
 @NamedQuery(name="UsuarioCliente.findAll", query="SELECT u FROM UsuarioCliente u")
-public class UsuarioCliente implements Serializable, IPersistent<Integer> {
+public class UsuarioCliente extends ActionForm implements Serializable, IPersistent<Integer> {
 	private static final long serialVersionUID = 1L;
 
 	@Id
