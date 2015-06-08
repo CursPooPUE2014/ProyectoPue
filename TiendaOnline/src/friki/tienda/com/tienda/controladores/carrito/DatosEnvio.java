@@ -11,6 +11,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.codehaus.jettison.json.JSONObject;
 
+import friki.tienda.com.Persistencia.DireccionEntrega;
 import friki.tienda.com.Persistencia.Pedido;
 import friki.tienda.com.daogenerico.GenericDAO;
 import friki.tienda.com.daogenerico.IGenericDAO;
@@ -63,32 +64,33 @@ public class DatosEnvio extends Action {
 			pedido2.setIdPedido(idPedido);
 			Pedido pedido = pedidoDAO.findByKey(pedido2, Integer.class);
 
-			/*
-			 * Actualización de los campos de envío pendientes de incluir en la
-			 * tabla direccionEntrega.
-			 * 
-			 * int idDirEntrega pedido.getId_dirEntrega();
-			 * 
-			 * DireccionEntrega direccionEntrega2 = new DireccionEntrega();
-			 * direccionEntrega2.setIdDirEntrega(idDirEntrega); DireccionEntrega
-			 * dirEntrega = direccionEntregaDAO. findByKey(direccionEntrega2,
-			 * Integer.class);
-			 * 
-			 * direccionEntrega.setTipoVia(tipoVia);
-			 * direccionEntrega.setDireccion(direccion);
-			 * direccionEntrega.setNumero(numero);
-			 * direccionEntrega.setPlanta(planta);
-			 * direccionEntrega.setPiso(piso);
-			 * direccionEntrega.setEscalera(escalera);
-			 * direccionEntrega.setBloque(bloque);
-			 * direccionEntrega.setCiudad(ciudad);
-			 * direccionEntrega.setProvincia(provincia);
-			 * direccionEntrega.setPais(pais);
-			 * direccionEntrega.setCodigoPostal(codigoPostal);
-			 * 
-			 * direccionEntregaDAO.update(dirEntrega);
-			 */
-
+		//  Actualización de los campos de envío en la tabla direccionEntrega.
+			  
+			int idDirEntrega = pedido.getId_dirEntrega();
+		
+			DireccionEntrega direccionEntrega2 = new DireccionEntrega();
+			direccionEntrega2.setId_dirEntrega(idDirEntrega);
+			 
+			IGenericDAO<Integer, DireccionEntrega> direccionEntregaDAO = 
+				 new GenericDAO<Integer, DireccionEntrega>();
+			 
+			DireccionEntrega direccionEntrega = 
+				 direccionEntregaDAO.findByKey(direccionEntrega2, Integer.class);
+			 	  
+			direccionEntrega.setTipoVia(tipoVia);
+			direccionEntrega.setDireccion(direccion);
+			direccionEntrega.setNumero(numero);
+			direccionEntrega.setPlanta(Integer.parseInt(planta));
+			direccionEntrega.setPiso(Integer.parseInt(piso));
+			direccionEntrega.setEscalera(escalera);
+			direccionEntrega.setBloque(bloque);
+			direccionEntrega.setCiudad(ciudad);
+			direccionEntrega.setProvincia(provincia);
+			direccionEntrega.setPais(pais);
+			direccionEntrega.setCodigoPostal(codigoPostal);
+			 
+			direccionEntregaDAO.update(direccionEntrega);
+			 
 			// Redirección a pago a fin compra.
 			json.append("page_redirect", "pago.jsp");
 
