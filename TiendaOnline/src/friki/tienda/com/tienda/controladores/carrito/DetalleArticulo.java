@@ -1,7 +1,5 @@
 package friki.tienda.com.tienda.controladores.carrito;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -9,14 +7,15 @@ import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.codehaus.jackson.map.ObjectMapper;
 
-import friki.tienda.com.Persistencia.Articulo;
-import friki.tienda.com.Persistencia.Lineaspedido;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
 import friki.tienda.com.Persistencia.Articulo;
 import friki.tienda.com.daogenerico.GenericDAO;
 import friki.tienda.com.daogenerico.IGenericDAO;
-import tests.persistencia.TestPersistenciaDAO;
-
 
 public class DetalleArticulo extends Action {
 
@@ -25,44 +24,34 @@ public class DetalleArticulo extends Action {
 
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
-				
-		int idArticulo = (int) request.getAttribute("idArticulo");
+
+		int idArticulo = Integer.parseInt(request.getParameter("id"));
+
+		response.setContentType("application/json");
 
 		Articulo articulo = new Articulo();
 		articulo.setIdArticulo(idArticulo);
 
-		IGenericDAO<Integer, Articulo> articuloDAO = new GenericDAO<Integer,Articulo>();
-		
+		IGenericDAO<Integer, Articulo> articuloDAO = new GenericDAO<Integer, Articulo>();
+
 		articulo = articuloDAO.findByKey(articulo, Integer.class);
 
-		String json = crearJson(articulo);
-	
-		request.setAttribute("json", json);
+		try {
 
+			PrintWriter out = response.getWriter();
+
+			ObjectMapper mapper = new ObjectMapper();
+			mapper.writeValue(out, articulo);
+
+			
+			
+		} catch(IOException e) {
+
+			e.printStackTrace();
+		}
+		
+		
 		return null;
 	}
 
-	private String crearJson(Articulo articulo){
-
-		StringBuilder sb = new StringBuilder();
-	
-		sb.append(("{\"categoria\":\"")).
-			append(articulo.getCategoria());
-		sb.append(("{\"descripcion\":\"")).
-			append(articulo.getDescripcion());
-		sb.append(("{\"imagen\":\"")).
-			append(articulo.getImagen());
-		sb.append(("{\"nombre\":\"")).
-			append(articulo.getNombre());
-		sb.append(("{\"novedad\":\"")).
-			append(articulo.getNovedad());	
-		sb.append(("{\"precio\":\"")).
-			append(articulo.getPrecio());	
-		sb.append(("{\"stock\":\"")).
-			append(articulo.getStock()).
-			append("}");
-				
-		return sb.toString();
-		
-}
 }
