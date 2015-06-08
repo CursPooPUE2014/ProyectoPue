@@ -9,8 +9,8 @@ import org.apache.log4j.PropertyConfigurator;
 import org.eclipse.jdt.internal.compiler.ast.ForeachStatement;
 
 import friki.tienda.com.Persistencia.Articulo;
-import friki.tienda.com.Persistencia.Lineaspedido;
-import friki.tienda.com.Persistencia.LineaspedidoPK;
+import friki.tienda.com.Persistencia.LineaPedido;
+import friki.tienda.com.Persistencia.LineaPedidoPK;
 import friki.tienda.com.Persistencia.Pedido;
 import friki.tienda.com.daogenerico.GenericDAO;
 import friki.tienda.com.daogenerico.IGenericDAO;
@@ -28,7 +28,7 @@ public class TestPersistenciaDAO {
 
 		Articulo articulo = null;
 		Pedido pedido = null;
-		Lineaspedido lpedido = null;
+		LineaPedido lpedido = null;
 
 		/*
 		 * Definicion de los DAO genéricos: toda su implementacion la heredan de
@@ -40,7 +40,7 @@ public class TestPersistenciaDAO {
 
 		IGenericDAO<Integer, Pedido> pedidoDAO = new GenericDAO<Integer,Pedido>();
 
-		IGenericDAO<LineaspedidoPK, Lineaspedido> lpedidoDAO = new GenericDAO<LineaspedidoPK, Lineaspedido>();
+		IGenericDAO<LineaPedidoPK, LineaPedido> lpedidoDAO = new GenericDAO<LineaPedidoPK, LineaPedido>();
 
 		/*
 		 * OPERACIONES CON articuloS
@@ -68,8 +68,8 @@ public class TestPersistenciaDAO {
 		 */
 		articulo = new Articulo();
 		articulo.setIdArticulo(4);
-		articulo.setCategoria("Series");
-		articulo.setTipoDeProducto("Ropa");
+		articulo.setIdCategoria(1);
+		articulo.setId_tipoProducto(1);
 		articulo.setDescripcion("Camiseta Breaking Bad");
 		articulo.setPrecio(20.5);
 		articulo.setStock(10);
@@ -130,6 +130,9 @@ public class TestPersistenciaDAO {
 		pedido = new Pedido();
 		pedido.setIdPedido(4);
 		pedido.setIdCliente(3);
+		pedido.setId_dirEntrega(1);
+		pedido.setIdEstado(1);
+		pedido.setTotalAPagar(200.0);
 		
 		// Solo grabamos si primero no lo encontramos en la bd
 		if (pedidoDAO.findByKey(pedido, Integer.class ) == null) {
@@ -159,29 +162,29 @@ public class TestPersistenciaDAO {
 		if (log.isDebugEnabled())
 			log.debug("Mostrando todas las lpedidos...");
 
-		ArrayList<Lineaspedido> lpedidos = new ArrayList<Lineaspedido>(
-				lpedidoDAO.listAll(Lineaspedido.class));
+		ArrayList<LineaPedido> lpedidos = new ArrayList<LineaPedido>(
+				lpedidoDAO.listAll(LineaPedido.class));
 
-		for (Lineaspedido m : lpedidos)
+		for (LineaPedido m : lpedidos)
 			System.out.println(m);
 
 		/*
 		 * Creamos una lpedido, la grabamos y la mostramos por pantalla
 		 */
-		lpedido = new Lineaspedido();
+		lpedido = new LineaPedido();
 		lpedido.setArticulo(articulo);
 		lpedido.setPedido(pedido);
-		lpedido.setId(new LineaspedidoPK(articulo.getIdArticulo(), pedido.getIdPedido()));
+		lpedido.setId(new LineaPedidoPK(articulo.getIdArticulo(), pedido.getIdPedido()));
 		lpedido.setPrecio(300d);
 		
 		// Si la lpedido existe en la base de datos...la eliminamos
-		if (lpedidoDAO.findByKey(lpedido, LineaspedidoPK.class) != null) {
+		if (lpedidoDAO.findByKey(lpedido, LineaPedidoPK.class) != null) {
 			lpedidoDAO.delete(lpedido);
 		}
 
 		if (lpedidoDAO.save(lpedido) != null) {
 			if (log.isDebugEnabled())
-				log.debug("Lineaspedido grabada: " + lpedido);
+				log.debug("LineaPedido grabada: " + lpedido);
 		} else {
 			if (log.isDebugEnabled())
 				log.debug("No se puede grabar la lpedido: " + lpedido);

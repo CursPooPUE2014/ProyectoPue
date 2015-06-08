@@ -4,44 +4,45 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
-import org.apache.struts.action.ActionForm;
-
 import friki.tienda.com.daogenerico.IPersistent;
 
 import java.util.List;
 
 
+/**
+ * The persistent class for the articulo database table.
+ * 
+ */
 @Entity
-@Table(name="articulos")
 @NamedQuery(name="Articulo.findAll", query="SELECT a FROM Articulo a")
-public class Articulo extends ActionForm implements Serializable, IPersistent<Integer> {
+public class Articulo implements Serializable, IPersistent<Integer> {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	//@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="id_articulo")
 	private int idArticulo;
 
-	private String categoria;
-
 	private String descripcion;
 
-	private String imagen;
+	@Column(name="id_categoria")
+	private int idCategoria;
+
+	@Column(name="id_proveedor")
+	private int idProveedor;
+
+	private int id_tipoProducto;
 
 	private String nombre;
-	
-	private String novedad;
+
+	private byte novedad;
 
 	private double precio;
 
 	private int stock;
 
-	@Column(name="tipo_de_producto")
-	private String tipoDeProducto;
-
-	//bi-directional many-to-one association to Lineaspedido
+	//bi-directional many-to-one association to Imagen
 	@OneToMany(mappedBy="articulo")
-	private List<Lineaspedido> lineaspedidos;
+	private List<Imagen> imagens;
 
 	public Articulo() {
 	}
@@ -54,14 +55,6 @@ public class Articulo extends ActionForm implements Serializable, IPersistent<In
 		this.idArticulo = idArticulo;
 	}
 
-	public String getCategoria() {
-		return this.categoria;
-	}
-
-	public void setCategoria(String categoria) {
-		this.categoria = categoria;
-	}
-
 	public String getDescripcion() {
 		return this.descripcion;
 	}
@@ -70,12 +63,28 @@ public class Articulo extends ActionForm implements Serializable, IPersistent<In
 		this.descripcion = descripcion;
 	}
 
-	public String getImagen() {
-		return this.imagen;
+	public int getIdCategoria() {
+		return this.idCategoria;
 	}
 
-	public void setImagen(String imagen) {
-		this.imagen = imagen;
+	public void setIdCategoria(int idCategoria) {
+		this.idCategoria = idCategoria;
+	}
+
+	public int getIdProveedor() {
+		return this.idProveedor;
+	}
+
+	public void setIdProveedor(int idProveedor) {
+		this.idProveedor = idProveedor;
+	}
+
+	public int getId_tipoProducto() {
+		return this.id_tipoProducto;
+	}
+
+	public void setId_tipoProducto(int id_tipoProducto) {
+		this.id_tipoProducto = id_tipoProducto;
 	}
 
 	public String getNombre() {
@@ -84,6 +93,14 @@ public class Articulo extends ActionForm implements Serializable, IPersistent<In
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+	public byte getNovedad() {
+		return this.novedad;
+	}
+
+	public void setNovedad(byte novedad) {
+		this.novedad = novedad;
 	}
 
 	public double getPrecio() {
@@ -102,47 +119,30 @@ public class Articulo extends ActionForm implements Serializable, IPersistent<In
 		this.stock = stock;
 	}
 
-	public String getTipoDeProducto() {
-		return this.tipoDeProducto;
+	public List<Imagen> getImagens() {
+		return this.imagens;
 	}
 
-	public void setTipoDeProducto(String tipoDeProducto) {
-		this.tipoDeProducto = tipoDeProducto;
+	public void setImagens(List<Imagen> imagens) {
+		this.imagens = imagens;
 	}
 
-	public List<Lineaspedido> getLineaspedidos() {
-		return this.lineaspedidos;
+	public Imagen addImagen(Imagen imagen) {
+		getImagens().add(imagen);
+		imagen.setArticulo(this);
+
+		return imagen;
 	}
 
-	public void setLineaspedidos(List<Lineaspedido> lineaspedidos) {
-		this.lineaspedidos = lineaspedidos;
-	}
+	public Imagen removeImagen(Imagen imagen) {
+		getImagens().remove(imagen);
+		imagen.setArticulo(null);
 
-	public Lineaspedido addLineaspedido(Lineaspedido lineaspedido) {
-		getLineaspedidos().add(lineaspedido);
-		lineaspedido.setArticulo(this);
-
-		return lineaspedido;
-	}
-
-	public Lineaspedido removeLineaspedido(Lineaspedido lineaspedido) {
-		getLineaspedidos().remove(lineaspedido);
-		lineaspedido.setArticulo(null);
-
-		return lineaspedido;
-	}
-
-	public void setNovedad(String novedad) {
-		
-		this.novedad=novedad;
-	}
-	public String getNovedad( ) {
-		
-		return novedad;
+		return imagen;
 	}
 
 	@Override
-	public Integer getKey() {		
+	public Integer getKey() {
 		return this.idArticulo;
 	}
 

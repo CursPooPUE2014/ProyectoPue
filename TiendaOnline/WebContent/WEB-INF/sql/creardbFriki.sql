@@ -7,7 +7,7 @@ create table imagen (
 	id_articulo int not null,
 	descripcion varchar(60),
 	url_imagen varchar(120),
-	novedad tinyint(1) not null default false
+	novedad int not null
 );
 
 create table proveedor (
@@ -32,7 +32,7 @@ create table articulo (
   stock int not null,
   id_categoria int not null,
   id_tipoProducto int not null,
-  novedad tinyint(1),
+  novedad int not null,
   id_proveedor int
 );
 

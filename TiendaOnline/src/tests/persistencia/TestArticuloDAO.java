@@ -9,9 +9,11 @@ import org.apache.log4j.PropertyConfigurator;
 import org.eclipse.jdt.internal.compiler.ast.ForeachStatement;
 
 import friki.tienda.com.Persistencia.Articulo;
-import friki.tienda.com.Persistencia.Lineaspedido;
-import friki.tienda.com.Persistencia.LineaspedidoPK;
+import friki.tienda.com.Persistencia.Categoria;
+import friki.tienda.com.Persistencia.LineaPedido;
+import friki.tienda.com.Persistencia.LineaPedidoPK;
 import friki.tienda.com.Persistencia.Pedido;
+import friki.tienda.com.Persistencia.TipoProducto;
 import friki.tienda.com.daogenerico.GenericDAO;
 import friki.tienda.com.daogenerico.IGenericDAO;
 
@@ -55,19 +57,35 @@ public class TestArticuloDAO {
 
 		for (Articulo a : articulos){
 			System.out.println(a.getNombre());
-			System.out.println(a.getCategoria());
+			System.out.println(a.getPrecio());
 		}
 		
 		
 		// 2ªOperación: Búsqueda de un artículo en concreto en la base de datos: findByKey()
+		//Categoria cat= new Categoria;
+		
+		/*
+		Categoria cat = new Categoria();
+		cat.setIdCategoria(4);
+		cat.setNombre("Extras");
+		cat.setDescripcion("Categoria extra");
+		
+		TipoProducto tProducto = new TipoProducto();
+		tProducto.setId_tipoProducto(4);
+		tProducto.setNombre("Tipo Extra");
+		tProducto.setDescripcion("Tipo Extra");
+		*/
+		
 		articulo = new Articulo();
-		articulo.setIdArticulo(5);
-		articulo.setCategoria("Series2");
-		articulo.setTipoDeProducto("Ropa");
+		articulo.setIdArticulo(5);	
+		
+		articulo.setIdCategoria(1);
+		articulo.setId_tipoProducto(1);
 		articulo.setDescripcion("Camiseta Breaking Bad");
 		articulo.setPrecio(20.5);
 		articulo.setStock(10);
 		articulo.setNombre("Camiseta Breaking Bad");
+		articulo.setNovedad((byte)0);
 		
 		
 		//Si el objeto no está en la BD, devuelve NULL 

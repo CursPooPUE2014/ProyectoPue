@@ -3,17 +3,19 @@
 	
 	<persistence-unit name="TiendaOnline">
 		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-		
-		
+		<class>friki.tienda.com.Persistencia.LineaPedido</class>
+		<class>friki.tienda.com.Persistencia.LineaPedidoPK</class>
+		<class>friki.tienda.com.Persistencia.Proveedor</class>
+		<class>friki.tienda.com.Persistencia.Rol</class>
+		<class>friki.tienda.com.Persistencia.UsuarioAdministrador</class>
 		<class>friki.tienda.com.Persistencia.Articulo</class>
+		<class>friki.tienda.com.Persistencia.Imagen</class>
 		<class>friki.tienda.com.Persistencia.Categoria</class>
-		<class>friki.tienda.com.Persistencia.Lineaspedido</class>
-		<class>friki.tienda.com.Persistencia.LineaspedidoPK</class>
+		<class>friki.tienda.com.Persistencia.TipoProducto</class>
 		<class>friki.tienda.com.Persistencia.Pedido</class>
-		<class>friki.tienda.com.Persistencia.Role</class>
-		<class>friki.tienda.com.Persistencia.Tiposproducto</class>
-		<class>friki.tienda.com.Persistencia.Usuariosadministrador</class>
-		<class>friki.tienda.com.Persistencia.Usuarioscliente</class>
+		<class>friki.tienda.com.Persistencia.DireccionEntrega</class>
+		<class>friki.tienda.com.Persistencia.Estado</class>
+		<class>friki.tienda.com.Persistencia.UsuarioCliente</class>
 <!-- 		<exclude-unlisted-classes>false</exclude-unlisted-classes>  -->
 		
 		<properties>

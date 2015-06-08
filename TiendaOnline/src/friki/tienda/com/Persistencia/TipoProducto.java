@@ -8,31 +8,30 @@ import friki.tienda.com.daogenerico.IPersistent;
 
 
 /**
- * The persistent class for the categoria database table.
+ * The persistent class for the tipoproducto database table.
  * 
  */
 @Entity
-@NamedQuery(name="Categoria.findAll", query="SELECT c FROM Categoria c")
-public class Categoria implements Serializable, IPersistent<Integer> {
+@NamedQuery(name="TipoProducto.findAll", query="SELECT t FROM TipoProducto t")
+public class TipoProducto implements Serializable, IPersistent<Integer> {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="id_categoria")
-	private int idCategoria;
+	private int id_tipoProducto;
 
 	private String descripcion;
 
 	private String nombre;
 
-	public Categoria() {
+	public TipoProducto() {
 	}
 
-	public int getIdCategoria() {
-		return this.idCategoria;
+	public int getId_tipoProducto() {
+		return this.id_tipoProducto;
 	}
 
-	public void setIdCategoria(int idCategoria) {
-		this.idCategoria = idCategoria;
+	public void setId_tipoProducto(int id_tipoProducto) {
+		this.id_tipoProducto = id_tipoProducto;
 	}
 
 	public String getDescripcion() {
@@ -53,7 +52,7 @@ public class Categoria implements Serializable, IPersistent<Integer> {
 
 	@Override
 	public Integer getKey() {
-		return this.idCategoria;
+		return this.id_tipoProducto;
 	}
 
 }

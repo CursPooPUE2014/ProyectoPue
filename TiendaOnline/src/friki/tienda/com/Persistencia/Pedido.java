@@ -7,15 +7,13 @@ import javax.persistence.*;
 import friki.tienda.com.daogenerico.IPersistent;
 
 import java.util.Date;
-import java.util.List;
 
 
 /**
- * The persistent class for the pedidos database table.
+ * The persistent class for the pedido database table.
  * 
  */
 @Entity
-@Table(name="pedidos")
 @NamedQuery(name="Pedido.findAll", query="SELECT p FROM Pedido p")
 public class Pedido implements Serializable, IPersistent<Integer> {
 	private static final long serialVersionUID = 1L;
@@ -24,27 +22,21 @@ public class Pedido implements Serializable, IPersistent<Integer> {
 	@Column(name="id_pedido")
 	private int idPedido;
 
-	private String estado;
-
 	@Temporal(TemporalType.DATE)
 	private Date fecha;
 
 	@Column(name="id_cliente")
 	private int idCliente;
 
+	private int id_dirEntrega;
+
+	@Column(name="id_estado")
+	private int idEstado;
+
 	@Column(name="total_a_pagar")
 	private double totalAPagar;
 
-	//bi-directional many-to-one association to Lineaspedido
-	@OneToMany(mappedBy="pedido")
-	private List<Lineaspedido> lineaspedidos;
-
-	public Pedido(int id) {
-		this.idPedido=id;
-	}
-	
-	
-	public Pedido(){
+	public Pedido() {
 	}
 
 	public int getIdPedido() {
@@ -53,14 +45,6 @@ public class Pedido implements Serializable, IPersistent<Integer> {
 
 	public void setIdPedido(int idPedido) {
 		this.idPedido = idPedido;
-	}
-
-	public String getEstado() {
-		return this.estado;
-	}
-
-	public void setEstado(String estado) {
-		this.estado = estado;
 	}
 
 	public Date getFecha() {
@@ -79,34 +63,28 @@ public class Pedido implements Serializable, IPersistent<Integer> {
 		this.idCliente = idCliente;
 	}
 
+	public int getId_dirEntrega() {
+		return this.id_dirEntrega;
+	}
+
+	public void setId_dirEntrega(int id_dirEntrega) {
+		this.id_dirEntrega = id_dirEntrega;
+	}
+
+	public int getIdEstado() {
+		return this.idEstado;
+	}
+
+	public void setIdEstado(int idEstado) {
+		this.idEstado = idEstado;
+	}
+
 	public double getTotalAPagar() {
 		return this.totalAPagar;
 	}
 
 	public void setTotalAPagar(double totalAPagar) {
 		this.totalAPagar = totalAPagar;
-	}
-
-	public List<Lineaspedido> getLineaspedidos() {
-		return this.lineaspedidos;
-	}
-
-	public void setLineaspedidos(List<Lineaspedido> lineaspedidos) {
-		this.lineaspedidos = lineaspedidos;
-	}
-
-	public Lineaspedido addLineaspedido(Lineaspedido lineaspedido) {
-		getLineaspedidos().add(lineaspedido);
-		lineaspedido.setPedido(this);
-
-		return lineaspedido;
-	}
-
-	public Lineaspedido removeLineaspedido(Lineaspedido lineaspedido) {
-		getLineaspedidos().remove(lineaspedido);
-		lineaspedido.setPedido(null);
-
-		return lineaspedido;
 	}
 
 	@Override
