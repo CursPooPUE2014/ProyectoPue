@@ -16,15 +16,18 @@ function redireccionar() {
     window.location = "indice.html";
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
+function validacion(){
+    $.ajax({
+        type: "POST",
+        url: "/altaArticulo",
+        //data: "name=" + name,
+        success: function(response){
+            // we have the response
+            $('#info').html(response);
+            alert("Hace algo");
+        },
+        error: function(e){
+            alert('Error: ' + e);
+        }
+    });
+}

@@ -21,6 +21,8 @@ public class AltaArticulo extends Action {
 			HttpServletRequest req, HttpServletResponse resp)
 			throws JSONException {
 
+		System.out.println("Llego");
+
 		JSONObject json = new JSONObject();
 
 		resp.setContentType("application/json");
