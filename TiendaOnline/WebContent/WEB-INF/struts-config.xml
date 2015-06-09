@@ -6,10 +6,8 @@
 <struts-config>
 
 	<form-beans>
-		<form-bean name="LoginClienteBean"
-			type="friki.tienda.com.tienda.beans.loginClienteBean" />
-					<form-bean name="ClienteBean"
-			type="friki.tienda.com.tienda.beans.ClienteBean" />
+		<form-bean name="UsuarioCliente"
+			type="friki.tienda.com.Persistencia.UsuarioCliente" />
 		<form-bean name="ArticuloBean"
 			type="friki.tienda.com.Persistencia.Articulo" />
 	</form-beans>
@@ -17,7 +15,7 @@
 	<action-mappings>	
 		<action 
 			path="/loginCliente" 
-			name="LoginClienteBean"
+			name="UsuarioCliente"
 			scope="request"
 			validate="true"		
 			type="friki.tienda.com.tienda.controladores.cliente.LoginClienteAction">	
@@ -25,7 +23,7 @@
   		
   		<action 
 			path="/registroCliente" 
-			name="ClienteBean"
+			name="UsuarioCliente"
 			scope="request"
 			validate="true"		
 			type="friki.tienda.com.tienda.controladores.cliente.RegistroClienteAction">	

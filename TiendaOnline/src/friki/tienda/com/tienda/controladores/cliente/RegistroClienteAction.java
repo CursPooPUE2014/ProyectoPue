@@ -12,7 +12,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.codehaus.jettison.json.JSONObject;
 
-import friki.tienda.com.tienda.beans.ClienteBean;
+import friki.tienda.com.Persistencia.UsuarioCliente;
 
 public class RegistroClienteAction extends Action {
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
@@ -22,38 +22,56 @@ public class RegistroClienteAction extends Action {
 		
 		// recuperamos los parámetros de la request y creamos el objeto
 		String nombre = request.getParameter("nombre");
+		String apellido1 = request.getParameter("apellido1");
+		String apellido2 = request.getParameter("apellido2");
+		String nif = request.getParameter("nif");
 		String contrasenya = request.getParameter("contrasenya");
-		String dir_postal = request.getParameter("dir_postal");
+		String dirPostal = request.getParameter("dirPostal");
 		String email = request.getParameter("email");
 		String telefono = request.getParameter("telefono");
 		
-		ClienteBean cliente = new ClienteBean(nombre,contrasenya,dir_postal,email);
-		cliente.setTelefono(telefono);
 		
-		// creamos objeto json que enviaremos en la response
-		
+		// creamos objeto json que enviaremos en la response		
 		JSONObject js = new JSONObject();
 		
-		// vemos si se han introducido datos correctos en el form
-		String err = cliente.preValidar();
+		UsuarioCliente cliente = new UsuarioCliente(nombre,contrasenya,email);
 		
-		// si hay errores al validar datos añadimos msg al json
-		// si no, comprobamos si el usuario existe en la BBDD
-		if(err != null){
-			js.accumulate("errores",err);
-		} else {
-			cliente.save();
-			// si ha habido error al crear el cliente en la BBDD cargamos error en el json
-			// si no cargamos el usuario en la sesion
-			/*
-			if(cliente.ok()){
-				js.accumulate("errores","Usuario o contraseña incorrecto");
+		//Comprobamos si es válido, o sea que no ha saltado
+		// la excepción del encrypt
+		if(cliente.getIsValid()){
+			// vemos si se han introducido datos correctos en el form
+			String err = cliente.preValidarRegistro();
+			
+			// si hay errores al validar datos añadimos msg al json
+			// si no, comprobamos si el usuario existe en la BBDD
+			if(err != null){
+				js.put("errores",err);
 			} else {
-				// cargo el cliente en la sesion
-				HttpSession sesion = request.getSession(true);
-				sesion.setAttribute("cliente", cliente);
+				// añadimos el resto de campos al cliente
+				cliente.setApellido1(apellido1);
+				cliente.setApellido2(apellido2);
+				cliente.setNif(nif);
+				cliente.setDirPostal(dirPostal);
+				cliente.setTelefono(telefono);
+
+				UsuarioCliente usuario = cliente.saveCliente(cliente);		
+				// si ha habido error al crear el cliente en la BBDD cargamos error en el json
+				// si no cargamos el usuario en la sesion
+				if(usuario == null ){
+					js.put("errores","Error al crear el usuario");
+				} else {
+					/* cargo el cliente en la sesion 
+					 * retorno el json
+					 */
+					js.put("errores","");
+					js.put("cliente",usuario);
+					HttpSession sesion = request.getSession(true);
+					sesion.setAttribute("cliente", usuario);
+				}
 			}
-			*/
+		} else {
+			js.put("errores","Error al crear el Usuario. </br>"
+					+ "Vuelva a intentarlo");
 		}
 
 		 
@@ -64,10 +82,5 @@ public class RegistroClienteAction extends Action {
 
 		return null;
 		
-	}
-	
-	private String pagRedirect(){
-		// segun de donde vengamos redirigimos a una página o a otra		
-		return null;
 	}
 }

@@ -99,16 +99,17 @@ public class GenericDAO<K,T extends IPersistent<K>> implements IGenericDAO<K,T> 
 			tx.commit();
 
 		} catch (PersistenceException e) {
-
 			tx.rollback();
 			throw e;
 		} catch (Exception e) {
-
 			System.out.println(e.getMessage());
+			// retornamos nulo para poder tratar este
+			// caso desde el controlador que haga la petición
+			return null;
 			
 		} finally {
-
 			close();
+			
 		}
 		return object;
 	}
