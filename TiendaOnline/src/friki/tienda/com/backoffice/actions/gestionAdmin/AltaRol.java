@@ -12,7 +12,7 @@ import java.io.Serializable;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import friki.tienda.com.Persistencia.Role;
+import friki.tienda.com.Persistencia.Rol;
 import friki.tienda.com.daogenerico.GenericDAO;
 import friki.tienda.com.daogenerico.IGenericDAO;
 
@@ -31,9 +31,9 @@ public class AltaRol extends Action {
 			
 			out = resp.getWriter();
 
-			Role rolBean = (Role) form;
+			Rol rolBean = (Rol) form;
 			
-			IGenericDAO<Integer, Role> adminDao = new GenericDAO<Integer, Role>();
+			IGenericDAO<Integer, Rol> adminDao = new GenericDAO<Integer, Rol>();
 
 			adminDao.save(rolBean);
 

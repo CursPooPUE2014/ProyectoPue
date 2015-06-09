@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import friki.tienda.com.Persistencia.Articulo;
-import friki.tienda.com.Persistencia.Usuariosadministrador;
+import friki.tienda.com.Persistencia.UsuarioAdministrador;
 import friki.tienda.com.daogenerico.GenericDAO;
 import friki.tienda.com.daogenerico.IGenericDAO;
 
@@ -31,9 +31,9 @@ public class ConsultarAdministradors extends Action {
 		try {
 			out = resp.getWriter();
 
-			Usuariosadministrador adm = (Usuariosadministrador) form;
+			UsuarioAdministrador adm = (UsuarioAdministrador) form;
 
-			IGenericDAO <Integer, Usuariosadministrador> admDao = new GenericDAO<Integer, Usuariosadministrador>();
+			IGenericDAO <Integer, UsuarioAdministrador> admDao = new GenericDAO<Integer, UsuarioAdministrador>();
 
 			adm = admDao.findByKey(adm, Integer.class);
 

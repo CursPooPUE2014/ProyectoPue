@@ -15,7 +15,7 @@ import org.apache.struts.action.ActionMapping;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import friki.tienda.com.Persistencia.Role;
+import friki.tienda.com.Persistencia.Rol;
 import friki.tienda.com.daogenerico.GenericDAO;
 import friki.tienda.com.daogenerico.IGenericDAO;
 import friki.tienda.com.tienda.utilities.UtilitiesJSON;
@@ -34,7 +34,7 @@ public class LeerRoles extends Action {
 
 		JSONObject json = new JSONObject();
 
-		List<Role> listaRoles = new ArrayList<Role>();
+		List<Rol> listaRoles = new ArrayList<Rol>();
 
 		resp.setContentType("application/json");
 
@@ -43,9 +43,9 @@ public class LeerRoles extends Action {
 		try {
 			out = resp.getWriter();
 
-			IGenericDAO<Integer, Role> rolDao = new GenericDAO<Integer, Role>();
+			IGenericDAO<Integer, Rol> rolDao = new GenericDAO<Integer, Rol>();
 
-			listaRoles = rolDao.listAll(Role.class);
+			listaRoles = rolDao.listAll(Rol.class);
 
 			if (listaRoles != null) {
 

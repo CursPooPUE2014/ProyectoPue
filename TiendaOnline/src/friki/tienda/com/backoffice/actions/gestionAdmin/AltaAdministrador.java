@@ -12,10 +12,9 @@ import java.io.Serializable;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import friki.tienda.com.Persistencia.Usuariosadministrador;
 import friki.tienda.com.daogenerico.GenericDAO;
 import friki.tienda.com.daogenerico.IGenericDAO;
-
+import friki.tienda.com.Persistencia.UsuarioAdministrador;
 public class AltaAdministrador extends Action {
 
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
@@ -31,9 +30,9 @@ public class AltaAdministrador extends Action {
 			
 			out = resp.getWriter();
 
-			Usuariosadministrador adminBean = (Usuariosadministrador) form;
+			UsuarioAdministrador adminBean = (UsuarioAdministrador) form;
 			
-			IGenericDAO<Integer, Usuariosadministrador> adminDao = new GenericDAO<Integer, Usuariosadministrador>();
+			IGenericDAO<Integer, UsuarioAdministrador> adminDao = new GenericDAO<Integer, UsuarioAdministrador>();
 
 			adminDao.save(adminBean);
 

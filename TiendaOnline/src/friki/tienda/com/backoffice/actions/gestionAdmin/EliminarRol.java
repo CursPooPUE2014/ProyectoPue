@@ -11,7 +11,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.json.JSONException;
 import org.json.JSONObject;
-import friki.tienda.com.Persistencia.Role;
+import friki.tienda.com.Persistencia.Rol;
 import friki.tienda.com.daogenerico.GenericDAO;
 import friki.tienda.com.daogenerico.IGenericDAO;
 
@@ -34,9 +34,9 @@ public class EliminarRol extends Action {
 			// De aqui se reciben los nuevos campos de la categoria desde un
 			// formulario.
 
-			IGenericDAO<Integer, Role> rolDao = new GenericDAO<Integer, Role>();
+			IGenericDAO<Integer, Rol> rolDao = new GenericDAO<Integer, Rol>();
 
-			Role rolBean = (Role) json.get("rol");
+			Rol rolBean = (Rol) json.get("rol");
 
 			if (rolBean != null) {
 				rolDao.delete(rolBean);

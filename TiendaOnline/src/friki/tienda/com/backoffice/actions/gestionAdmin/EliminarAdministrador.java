@@ -11,7 +11,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.json.JSONException;
 import org.json.JSONObject;
-import friki.tienda.com.Persistencia.Usuariosadministrador;
+import friki.tienda.com.Persistencia.UsuarioAdministrador;
 import friki.tienda.com.daogenerico.GenericDAO;
 import friki.tienda.com.daogenerico.IGenericDAO;
 
@@ -34,9 +34,9 @@ public class EliminarAdministrador extends Action {
 			// De aqui se reciben los nuevos campos de la categoria desde un
 			// formulario.
 
-			IGenericDAO<Integer, Usuariosadministrador> adminDao = new GenericDAO<Integer, Usuariosadministrador>();
+			IGenericDAO<Integer, UsuarioAdministrador> adminDao = new GenericDAO<Integer, UsuarioAdministrador>();
 
-			Usuariosadministrador adminBean = (Usuariosadministrador) json.get("Usuariosadministrador");
+			UsuarioAdministrador adminBean = (UsuarioAdministrador) json.get("UsuarioAdministrador");
 
 			if (adminBean != null) {
 				adminDao.delete(adminBean);
