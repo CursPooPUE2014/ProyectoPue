@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.1.0.final using JasperReports Library version 6.1.0  -->
-<!-- 2015-06-04T14:20:19 -->
+<!-- 2015-06-09T14:36:41 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="informeClientesVIP" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7a5c9b49-9dc5-422a-ac69-e92cf61ef530">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="dbfriki"/>
 	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false"/>
@@ -14,30 +14,56 @@
 		</conditionalStyle>
 	</style>
 	<queryString>
-		<![CDATA[select * from usuarioscliente inner join  pedidos on id_usuario = id_cliente
- where estado='pagado' order by total_a_pagar desc]]>
+		<![CDATA[select id_usuario,id_pedido,nombre,email,telefono,fecha, Sum(total_a_pagar) 
+from usuariocliente join pedido  on  id_usuario= id_cliente
+ join estado on pedido.id_estado=estado.id_estado 
+ where estado='Pagado' and total_a_pagar>=100 order by total_a_pagar desc]]>
 	</queryString>
 	<field name="id_usuario" class="java.lang.Integer">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="nombre" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="id_pedido" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
+	<field name="nombre" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
 	<field name="email" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="telefono" class="java.lang.Integer">
+	<field name="telefono" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="fecha" class="java.sql.Date">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="total_a_pagar" class="java.lang.Double">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
+	<field name="Sum(total_a_pagar)" class="java.lang.Double"/>
+	<group name="Group1">
+		<groupExpression><![CDATA[$F{Sum(total_a_pagar)}]]></groupExpression>
+		<groupHeader>
+			<band height="27">
+				<frame>
+					<reportElement mode="Opaque" x="0" y="3" width="721" height="24" forecolor="#B89F7D" backcolor="#000000" uuid="f24569ed-2518-465a-a480-0c195aacd180"/>
+					<textField isStretchWithOverflow="true">
+						<reportElement style="SubTitle" x="2" y="0" width="695" height="24" forecolor="#FFFFFF" uuid="5b7282d2-5169-4db4-b85a-e2391d4d4e66"/>
+						<textElement>
+							<font isBold="false"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{Sum(total_a_pagar)}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<rectangle>
+					<reportElement x="725" y="3" width="77" height="24" backcolor="#666666" uuid="70e1e931-2edd-4f3d-b09b-b9da04709f25"/>
+					<graphicElement>
+						<pen lineWidth="0.0"/>
+					</graphicElement>
+				</rectangle>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="6"/>
+		</groupFooter>
+	</group>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -55,14 +81,14 @@
 					<textElement verticalAlignment="Bottom">
 						<font isBold="false"/>
 					</textElement>
-					<text><![CDATA[Informes]]></text>
+					<text><![CDATA[Cherry Title]]></text>
 				</staticText>
 				<staticText>
 					<reportElement style="SubTitle" x="370" y="37" width="316" height="29" uuid="cfa21334-0634-4605-9ea7-aca4981f67e4"/>
 					<textElement textAlignment="Right">
 						<font size="22" isBold="false"/>
 					</textElement>
-					<text><![CDATA[Clientes VIP]]></text>
+					<text><![CDATA[Cherry SubTitle]]></text>
 				</staticText>
 			</frame>
 			<frame>
@@ -83,53 +109,46 @@
 	<columnHeader>
 		<band height="18" splitType="Stretch">
 			<staticText>
-				<reportElement style="Column header" x="0" y="0" width="113" height="18" forecolor="#000000" uuid="cf24a40d-a189-4cdc-8156-7371ab999944"/>
+				<reportElement style="Column header" x="0" y="0" width="132" height="18" forecolor="#000000" uuid="d17d9ad9-4d37-470f-91de-d321ace69e8e"/>
 				<textElement>
 					<font isBold="false"/>
 				</textElement>
 				<text><![CDATA[id_usuario]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="226" y="0" width="113" height="18" forecolor="#000000" uuid="eec43fcc-38d8-472a-833d-44fe7ec4e983"/>
+				<reportElement style="Column header" x="132" y="0" width="132" height="18" forecolor="#000000" uuid="aab96a68-4a0e-4445-bbca-6ca754d98102"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[id_pedido]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="264" y="0" width="132" height="18" forecolor="#000000" uuid="5371703e-fd09-4b07-9233-ae27d42760e5"/>
 				<textElement>
 					<font isBold="false"/>
 				</textElement>
 				<text><![CDATA[nombre]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="339" y="0" width="113" height="18" forecolor="#000000" uuid="0481a3ba-766a-4d27-be60-86461b50f4f8"/>
+				<reportElement style="Column header" x="396" y="0" width="132" height="18" forecolor="#000000" uuid="f88e1877-a208-4bc2-bc53-4aa83ae4b7ea"/>
 				<textElement>
 					<font isBold="false"/>
 				</textElement>
 				<text><![CDATA[email]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="452" y="0" width="113" height="18" forecolor="#000000" uuid="7a5f7ee8-7f2a-4c02-8d69-005fecfb4209"/>
+				<reportElement style="Column header" x="528" y="0" width="132" height="18" forecolor="#000000" uuid="d2c78fce-9312-49bc-b5c8-f3e12b20b0c2"/>
 				<textElement>
 					<font isBold="false"/>
 				</textElement>
 				<text><![CDATA[telefono]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="565" y="0" width="113" height="18" forecolor="#000000" uuid="69cd184f-e003-4492-888c-ed52f625c0d8"/>
+				<reportElement style="Column header" x="660" y="0" width="132" height="18" forecolor="#000000" uuid="452abdf4-07b3-4478-ba9d-a28deec0960a"/>
 				<textElement>
 					<font isBold="false"/>
 				</textElement>
 				<text><![CDATA[fecha]]></text>
-			</staticText>
-			<staticText>
-				<reportElement style="Column header" x="678" y="0" width="113" height="18" forecolor="#000000" uuid="6e581aa9-ce77-4afc-9715-62a3bd0c2912"/>
-				<textElement>
-					<font isBold="false"/>
-				</textElement>
-				<text><![CDATA[total_a_pagar]]></text>
-			</staticText>
-			<staticText>
-				<reportElement style="Column header" x="112" y="0" width="113" height="18" forecolor="#000000" uuid="ca00674c-b4b0-460d-ac1d-3057664147de"/>
-				<textElement>
-					<font isBold="false"/>
-				</textElement>
-				<text><![CDATA[id_pedido]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
@@ -138,114 +157,58 @@
 			<frame>
 				<reportElement style="Row" mode="Opaque" x="0" y="0" width="797" height="18" uuid="34a2ae4b-4055-476b-8676-d499f6af510b"/>
 				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" positionType="Float" x="0" y="0" width="113" height="18" uuid="b099afc9-3d94-4e24-932a-359e39231686"/>
+					<reportElement style="Detail" positionType="Float" x="0" y="0" width="132" height="18" uuid="bddaea82-836a-4db7-b3df-24b3c56b20f8"/>
 					<textElement>
 						<font size="14"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{id_usuario}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" positionType="Float" x="226" y="0" width="113" height="18" uuid="fe1c0a3f-3c46-4b80-9558-48d258fd944d"/>
+					<reportElement style="Detail" positionType="Float" x="132" y="0" width="132" height="18" uuid="e72ac05d-2bfd-46d2-9a7d-3ef9c20e390f"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{id_pedido}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="264" y="0" width="132" height="18" uuid="b07bac0f-7ecd-404b-a73f-9eefef87161e"/>
 					<textElement>
 						<font size="14"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" positionType="Float" x="339" y="0" width="113" height="18" uuid="336c743b-3af1-4ed3-96d5-19a6fda1624c"/>
+					<reportElement style="Detail" positionType="Float" x="396" y="0" width="132" height="18" uuid="7f72e0b7-5d15-4513-9131-6a57b4ac1e3d"/>
 					<textElement>
 						<font size="14"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" positionType="Float" x="452" y="0" width="113" height="18" uuid="c51021e5-1411-4ca1-a3f5-69c28440ef37"/>
+					<reportElement style="Detail" positionType="Float" x="528" y="0" width="132" height="18" uuid="f0a86c00-5b99-4f91-8a6d-c3401ba4499d"/>
 					<textElement>
 						<font size="14"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{telefono}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" positionType="Float" x="565" y="0" width="113" height="18" uuid="86eacee4-fe77-49d4-aec9-239da0c6c9c0"/>
+					<reportElement style="Detail" positionType="Float" x="660" y="0" width="132" height="18" uuid="9153ea66-f972-4c50-a579-ff08fcf2198b"/>
 					<textElement>
 						<font size="14"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" positionType="Float" x="678" y="0" width="113" height="18" uuid="71760861-c2a1-4fa5-a032-91e9af2ae4e8"/>
-					<textElement>
-						<font size="14"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$F{total_a_pagar}]]></textFieldExpression>
-				</textField>
-				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" positionType="Float" x="112" y="0" width="113" height="18" uuid="f7b0e4fb-7afa-4a3b-9c01-a83c6aa2d130"/>
-					<textElement>
-						<font size="14"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$F{id_pedido}]]></textFieldExpression>
-				</textField>
 			</frame>
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="308" splitType="Stretch">
+		<band height="7" splitType="Stretch">
 			<line>
 				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="501ac6c4-e9d4-43cb-ba6b-7f2f44394cf3"/>
 				<graphicElement>
 					<pen lineWidth="0.5" lineColor="#999999"/>
 				</graphicElement>
 			</line>
-			<bar3DChart>
-				<chart evaluationTime="Report">
-					<reportElement x="10" y="4" width="200" height="200" uuid="e00d8ee0-08cf-4de9-a9ad-0f5066362186"/>
-					<chartTitle/>
-					<chartSubtitle/>
-					<chartLegend/>
-				</chart>
-				<categoryDataset>
-					<categorySeries>
-						<seriesExpression><![CDATA["Clientes VIP"]]></seriesExpression>
-						<categoryExpression><![CDATA[$F{nombre}]]></categoryExpression>
-						<valueExpression><![CDATA[$F{total_a_pagar}]]></valueExpression>
-					</categorySeries>
-				</categoryDataset>
-				<bar3DPlot>
-					<plot/>
-					<itemLabel/>
-					<categoryAxisFormat>
-						<axisFormat/>
-					</categoryAxisFormat>
-					<valueAxisFormat>
-						<axisFormat/>
-					</valueAxisFormat>
-				</bar3DPlot>
-			</bar3DChart>
-			<stackedAreaChart>
-				<chart evaluationTime="Report">
-					<reportElement x="220" y="4" width="420" height="200" uuid="07e3fd2c-437c-4bc7-97c0-8a6d0d704372"/>
-					<chartTitle/>
-					<chartSubtitle/>
-					<chartLegend/>
-				</chart>
-				<categoryDataset>
-					<categorySeries>
-						<seriesExpression><![CDATA[""]]></seriesExpression>
-						<categoryExpression><![CDATA[$F{nombre}]]></categoryExpression>
-						<valueExpression><![CDATA[$F{total_a_pagar}]]></valueExpression>
-					</categorySeries>
-				</categoryDataset>
-				<areaPlot>
-					<plot/>
-					<categoryAxisFormat>
-						<axisFormat/>
-					</categoryAxisFormat>
-					<valueAxisFormat>
-						<axisFormat/>
-					</valueAxisFormat>
-				</areaPlot>
-			</stackedAreaChart>
 		</band>
 	</columnFooter>
 	<pageFooter>
