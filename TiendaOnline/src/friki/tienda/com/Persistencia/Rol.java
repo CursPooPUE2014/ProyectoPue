@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * The persistent class for the rol database table.
  * 
- */
+ */  
 @Entity
 @NamedQuery(name="Rol.findAll", query="SELECT r FROM Rol r")
 public class Rol extends ActionForm implements Serializable, IPersistent<Integer> {
