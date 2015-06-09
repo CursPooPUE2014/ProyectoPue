@@ -27,92 +27,155 @@
 </head>
 
 <body>
+<form class="form-register" id="form-register" method="post" action="">
     <!-- Page Content -->
-<div class="container">
+
     <div class="row col-md-12 text-center">
         <h2>Registro de usuario</h2>
     </div>
     <!-- cuerpo -->
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-4">
         </div>
-        <div class="col-md-6">
-            <form class="form-horizontal" role="form">
-            <div class="form-group">
-                <label class="control-label col-sm-3" for="name">Nombre:</label>
-                <div class="col-sm-9">
-                    <input type="text" class="form-control" id="nombre" placeholder="Nombre">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-sm-3" for="apel">Apellidos:</label>
-                <div class="col-sm-9"> 
-                    <input type="text" class="form-control" id="apellidos" placeholder="Apellidos">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-sm-3" for="mail">Mail:</label>
-                <div class="col-sm-9"> 
-                    <input type="mail" class="form-control" id="mail" placeholder="E-mail">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-sm-3" for="pass">Pass:</label>
-                <div class="col-sm-9"> 
-                    <input type="password" class="form-control" id="pass" placeholder="Password">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-sm-3" for="cpass">Confirmar pass:</label>
-                <div class="col-sm-9"> 
-                    <input type="password" class="form-control" id="cpass" placeholder="Confirmar password">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-sm-3" for="direccion">Dirección:</label>
-                <div class="col-sm-9"> 
-                    <input type="text" class="form-control" id="direccion" placeholder="Dirección">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-sm-3" for="pais">País:</label>
-                <div class="col-sm-9"> 
-                    <input type="text" class="form-control" id="pais" placeholder="Pais">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-sm-3" for="poblacion">Población:</label>
-                <div class="col-sm-9"> 
-                    <input type="text" class="form-control" id="poblacion" placeholder="Poblacion">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-sm-3" for="cp">Codigo Postal:</label>
-                <div class="col-sm-9"> 
-                    <input type="text" class="form-control" id="cp" placeholder="Codigo Postal">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-sm-3" for="telefono">Telefono:</label>
-                <div class="col-sm-9"> 
-                    <input type="text" class="form-control" id="telefono" placeholder="Telefono">
-                </div>
-            </div>
-            <!-- botones -->
-            <div class="form-group"> 
-                <div class="col-sm-offset-2 col-sm-10">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                    <button type="reset" class="btn btn-primary">Borrar</button>
-                </div>
-            </div>
-            </form>
-        </div>
-        <div class="col-md-3">
+        <div class="col-md-8">
+			<div class="row">
+				<!-- nombre -->
+				<div class="col-md-6">
+				<div class="form-group" id="nom_reg">
+					<label>Nombre*</label><input class="form-control required" placeholder="Nombre"
+					type="text" id="nominputreg">
+					<span class="hidden" id="nomloginglyph"></span>
+				</div>
+				</div>
+				<div class="col-md-6">
+					<div class="hide" id="regmensaje_nom"></div>
+				</div>
+			</div>
+			<div class="row">
+				<!-- Apellido 1-->
+				<div class="col-md-6">
+				<div class="form-group" id="fapel_reg">
+					<label>Primer apellido</label><input class="form-control required" placeholder="Primer apellido"
+					type="text" id="fapelinputreg">
+					<span class="hidden" id="fapelloginglyph"></span>
+				</div>
+				</div>
+				<div class="col-md-6">
+					<div class="hide" id="regmensaje_fapel"></div>
+				</div>
+			</div>
+			<div class="row">
+				<!-- Apellido 2-->
+				<div class="col-md-6">
+				<div class="form-group" id="sapel_reg">
+					<label>Segundo apellido</label><input class="form-control required" placeholder="Segundo apellido"
+					type="text" id="sapelinputreg">
+					<span class="hidden" id="sapelloginglyph"></span>
+				</div>
+				</div>
+				<div class="col-md-6">
+					<div class="hide" id="regmensaje_sapel"></div>
+				</div>
+			</div>
+			<div class="row">
+				<!-- NIF-->
+				<div class="col-md-6">
+				<div class="form-group" id="nif_reg">
+					<label>NIF</label><input class="form-control required" placeholder="NIF"
+					type="text" id="nifinputreg">
+					<span class="hidden" id="nifloginglyph"></span>
+				</div>
+				</div>
+				<div class="col-md-6">
+					<div class="hide" id="regmensaje_nif"></div>
+				</div>
+			</div>
+			<div class="row">
+				<!-- telefono-->
+				<div class="col-md-6">
+				<div class="form-group" id="telf_reg">
+					<label>Telefono</label><input class="form-control required" placeholder="Telefono"
+					type="text" id="telfinputreg">
+					<span class="hidden" id="telfloginglyph"></span>
+				</div>
+				</div>
+				<div class="col-md-6">
+					<div class="hide" id="regmensaje_telf"></div>
+				</div>
+			</div>
+			<div class="row">
+				<!-- dir postal-->
+				<div class="col-md-6">
+				<div class="form-group" id="dir_reg">
+					<label>Direccion postal</label><input class="form-control required" placeholder="Direccion postal"
+					type="text" id="dirinputreg">
+					<span class="hidden" id="dirlogiran"></span>
+				</div>
+				</div>
+				<div class="col-md-6">
+					<div class="hide" id="regmensaje_dir"></div>
+				</div>
+			</div>
+			<div class="row">
+				<!-- login -->
+				<div class="col-md-6">
+				<div class="form-group" id="login_reg">
+					<label>E-mail*</label><input class="form-control required email" placeholder="Email address"
+					type="email" id="logininputreg">
+					<span class="hidden" id="regloginglyph"></span>
+				</div>
+				</div>
+				<div class="col-md-6">
+					<div class="hide" id="regmensaje_log"></div>
+				</div>
+			</div>
+			<div class="row">
+				<!-- pass -->
+				<div class="col-md-6">
+				<div class="form-group" id="pass_reg">
+					<label>Password*</label><input class="form-control required" placeholder="Password"
+					type="password" id="passinputreg">
+					<span class="hidden" id="regpassglyph"></span>
+				</div>
+				</div>
+				<div class="col-md-6">
+					<div class="hide" id="regmensaje_pass"></div>
+				</div>
+			</div>
+            <div class="row">
+				<!-- confirm pass -->
+				<div class="col-md-6">
+				<div class="form-group" id="conf_pass_reg">
+					<label>Confirmar password*</label><input class="form-control required" placeholder="Password"
+					type="password" id="confpassinputreg">
+					<span class="hidden" id="regconfpassglyph"></span>
+				</div>
+				</div>
+				<div class="col-md-6">
+					<div class="hide" id="regconfmensaje_pass"></div>
+				</div>
+			</div>
         </div>
     </div>
-</div>
+            <!-- botones -->
+    <div class="row">
+        <div class="col-md-5">
+        </div>
+        <div class="col-md-2 text-center">
+            <input class="btn btn-primary" onclick="validarFormulario()" type="button" value="Login"/>
+            <input class="btn btn-primary" type="reset" value="Borrar"/>
+        </div>
+        <div class="col-md-5">
+        </div>
+    </div>
+	<!-- leyenda-->
+    <div class="row">
+        <div class="cold-md-12"><label><p></p>* Campos obligatorios</label></div>
+    </div>
+</form>
     <!-- /.container -->
 
+    <script type="text/javascript" src="js/validacion_registro.js"></script>
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
 

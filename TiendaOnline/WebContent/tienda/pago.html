@@ -27,50 +27,72 @@
 </head>
 
 <body>
+<form class="form-register" id="form-pago" method="post" action="">
     <!-- Page Content -->
-<div class="container">
     <div class="row col-md-12 text-center">
-        <h2>Pago</h2>
+        <h2>Pago de pedido</h2>
     </div>
     <!-- cuerpo -->
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-4">
         </div>
-        <div class="col-md-6">
-            <form class="form-horizontal" role="form">
-            <div class="form-group">
-                <label class="control-label col-sm-3" for="name">Nº Targeta:</label>
-                <div class="col-sm-9">
-                    <input type="text" class="form-control" id="num_targeta" placeholder="Numero targeta">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-sm-3" for="apel">Fecha caducidad:</label>
-                <div class="col-sm-9"> 
-                    <input type="date" class="form-control" id="fecha_cad" placeholder="Fecha caducidad">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-sm-3" for="mail">Nº Secreto:</label>
-                <div class="col-sm-9"> 
-                    <input type="password" class="form-control" id="num_secreto" placeholder="Numero secreto">
-                </div>
-            </div>
-            <!-- botones -->
-            <div class="form-group"> 
-                <div class="col-sm-offset-2 col-sm-10">
-                    <button type="submit" class="btn btn-primary">Pagar</button>
-                    <button type="button" class="btn btn-primary">Cancelar</button>
-                </div>
-            </div>
-            </form>
-        </div>
-        <div class="col-md-3">
+        <div class="col-md-8">
+			<div class="row">
+				<!-- numero targerta -->
+				<div class="col-md-6">
+				<div class="form-group" id="targeta">
+					<label>Nº targeta</label><input class="form-control required" placeholder="Numero de targeta"
+					type="text" id="num_target">
+					<span class="hidden" id="num_targetglyph"></span>
+				</div>
+				</div>
+				<div class="col-md-6">
+					<div class="hide" id="mensaje_target"></div>
+				</div>
+			</div>
+			<div class="row">
+				<!-- fecha -->
+				<div class="col-md-6">
+				<div class="form-group" id="fecha">
+					<label>Fecha de caducidad</label><input class="form-control required"
+					type="date" id="date">
+					<span class="hidden" id="dateglyph"></span>
+				</div>
+				</div>
+				<div class="col-md-6">
+					<div class="hide" id="mensaje_date"></div>
+				</div>
+			</div>
+            <div class="row">
+				<!-- numero secreto-->
+				<div class="col-md-6">
+				<div class="form-group" id="secreto">
+					<label>Nº secreto</label><input class="form-control required" placeholder="Numero secreto"
+					type="password" id="num_secret">
+					<span class="hidden" id="num_secretglyph"></span>
+				</div>
+				</div>
+				<div class="col-md-6">
+					<div class="hide" id="mensaje_secret"></div>
+				</div>
+			</div>
         </div>
     </div>
-</div>
+            <!-- botones -->
+    <div class="row">
+        <div class="col-md-5">
+        </div>
+        <div class="col-md-2 text-center">
+            <input class="btn btn-primary" onclick="validarFormulario()" type="button" value="Pagar"/>
+            <input class="btn btn-primary" type="button" value="Cancelar"/>
+        </div>
+        <div class="col-md-5">
+        </div>
+    </div>          
+</form>
     <!-- /.container -->
 
+    <script type="text/javascript" src="js/validacion_pago.js"></script>
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
 
