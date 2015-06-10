@@ -40,9 +40,9 @@ public class GenericDAO<K,T extends IPersistent<K>> implements IGenericDAO<K,T> 
 	
 	//private Class<T> claseDePersistencia;
 	
-	EntityManager manager;
+	protected EntityManager manager;
 	
-	private void load(){	
+	protected void load(){	
 		manager = ConnectionHelper.getInstance().getEntityManager();		
 	}
 	
