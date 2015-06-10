@@ -9,7 +9,7 @@ import org.apache.struts.action.ActionForm;
 
 import friki.tienda.com.daogenerico.GenericDAO;
 import friki.tienda.com.daogenerico.IPersistent;
-import friki.tienda.com.global.services.Md5Encryption;
+// import friki.tienda.com.global.services.Md5Encryption;
 import friki.tienda.com.tienda.accesDAO.ClienteDAO;
 import friki.tienda.com.tienda.utilities.UtilitiesTienda;
 
@@ -47,7 +47,7 @@ public class UsuarioCliente extends ActionForm implements Serializable, IPersist
 	// Para controlar si hay excepcion al encriptar el pwd
 	private Boolean isValid;
 	
-	private static Md5Encryption pwdEnc = new Md5Encryption();
+	// private static Md5Encryption pwdEnc = new Md5Encryption();
 
 	public UsuarioCliente() {
 	}
@@ -72,7 +72,7 @@ public class UsuarioCliente extends ActionForm implements Serializable, IPersist
 	// sin encriptar el pwd
 	public UsuarioCliente(String nombre, String contrasenya,
 			String email) {
-			contrasenya = contrasenya;
+			this.contrasenya = contrasenya;
 			this.nombre = nombre;
 			this.email = email;
 			this.contrasenya = contrasenya;	
