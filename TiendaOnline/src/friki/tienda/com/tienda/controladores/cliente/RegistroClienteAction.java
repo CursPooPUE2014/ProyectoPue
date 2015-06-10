@@ -22,14 +22,14 @@ public class RegistroClienteAction extends Action {
 		response.setContentType("application/json");
 		
 		// recuperamos los parámetros de la request y creamos el objeto
-		String nombre = request.getParameter("nombre");
-		String apellido1 = request.getParameter("apellido1");
-		String apellido2 = request.getParameter("apellido2");
-		String nif = request.getParameter("nif");
-		String contrasenya = request.getParameter("contrasenya");
-		String dirPostal = request.getParameter("dirPostal");
-		String email = request.getParameter("email");
-		String telefono = request.getParameter("telefono");
+		String nombre = request.getParameter("nominputreg");
+		String apellido1 = request.getParameter("fapelinputreg");
+		String apellido2 = request.getParameter("sapelinputreg");
+		String nif = request.getParameter("nifinputreg");
+		String contrasenya = request.getParameter("passinputreg");
+		String dirPostal = request.getParameter("dirinputreg");
+		String email = request.getParameter("regloginglyph");
+		String telefono = request.getParameter("telfinputreg");
 		
 		
 		// creamos objeto json que enviaremos en la response		

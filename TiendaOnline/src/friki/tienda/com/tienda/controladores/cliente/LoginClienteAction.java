@@ -24,7 +24,7 @@ public class LoginClienteAction extends Action {
 		
 		// recuperamos los parámetros de la request y creamos el objeto
 		String username = request.getParameter("email");
-		String pwd = request.getParameter("contrasenya");
+		String pwd = request.getParameter("passinput");
 
 		// creamos objeto json que enviaremos en la response
 		JSONObject js = new JSONObject();

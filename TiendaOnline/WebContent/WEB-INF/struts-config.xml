@@ -8,6 +8,8 @@
 	<form-beans>
 		<form-bean name="UsuarioCliente"
 			type="friki.tienda.com.Persistencia.UsuarioCliente" />
+		<form-bean name="ArticuloSearch"
+			type="friki.tienda.com.tienda.beans" />
 		<form-bean name="ArticuloBean"
 			type="friki.tienda.com.Persistencia.Articulo" />
 	</form-beans>
@@ -28,7 +30,14 @@
 			validate="true"		
 			type="friki.tienda.com.tienda.controladores.cliente.RegistroClienteAction">	
   		</action>	
-  		
+
+  		<action 
+			path="/searchArticulos" 
+			name="ArticuloSearch"
+			scope="request"
+			validate="true"		
+			type="friki.tienda.com.tienda.controladores.carrito.SearchArticulosAction">	
+  		</action>	
   		<!-- ACTIONS BACKOFFICE.GESTION_CATÁLOGO -->
   		
   		<action 
