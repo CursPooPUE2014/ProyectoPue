@@ -13,6 +13,7 @@ import org.apache.struts.action.ActionMapping;
 import org.codehaus.jettison.json.JSONObject;
 
 import friki.tienda.com.Persistencia.UsuarioCliente;
+import friki.tienda.com.tienda.operaciones.ClienteOperaciones;
 
 public class RegistroClienteAction extends Action {
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
@@ -40,7 +41,7 @@ public class RegistroClienteAction extends Action {
 		// la excepción del encrypt
 		if(cliente.getIsValid()){
 			// vemos si se han introducido datos correctos en el form
-			String err = cliente.preValidarRegistro();
+			String err = ClienteOperaciones.preValidarRegistro(cliente);
 			
 			// si hay errores al validar datos añadimos msg al json
 			// si no, comprobamos si el usuario existe en la BBDD
@@ -54,7 +55,7 @@ public class RegistroClienteAction extends Action {
 				cliente.setDirPostal(dirPostal);
 				cliente.setTelefono(telefono);
 
-				UsuarioCliente usuario = cliente.saveCliente(cliente);		
+				UsuarioCliente usuario = ClienteOperaciones.saveCliente(cliente);		
 				// si ha habido error al crear el cliente en la BBDD cargamos error en el json
 				// si no cargamos el usuario en la sesion
 				if(usuario == null ){

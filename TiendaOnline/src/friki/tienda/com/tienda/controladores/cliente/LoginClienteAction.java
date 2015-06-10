@@ -14,6 +14,7 @@ import org.apache.struts.action.ActionMapping;
 import org.codehaus.jettison.json.JSONObject;
 
 import friki.tienda.com.Persistencia.UsuarioCliente;
+import friki.tienda.com.tienda.operaciones.ClienteOperaciones;
 
 public class LoginClienteAction extends Action {
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
@@ -33,14 +34,14 @@ public class LoginClienteAction extends Action {
 
 		
 		// vemos si se han introducido datos correctos en el form
-		String err = cliente.preValidarLogin();
+		String err = ClienteOperaciones.preValidarLogin(cliente);
 		
 		// si hay errores al validar datos añadimos msg al json
 		// si no, comprobamos si el usuario existe en la BBDD
 		if(err != null){
 			js.put("errores",err);
 		} else {
-			cliente = cliente.existLogin();
+			cliente = ClienteOperaciones.existLogin(cliente);
 			// si el usuario es nulo añadimos al json msg de error
 			// si no cargamos el usuario en la sesion
 			if(cliente == null){
